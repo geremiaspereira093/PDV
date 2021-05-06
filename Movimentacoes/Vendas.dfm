@@ -3,7 +3,7 @@ object frmVendas: TfrmVendas
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Vendas'
-  ClientHeight = 702
+  ClientHeight = 615
   ClientWidth = 1370
   Color = clMedGray
   Font.Charset = DEFAULT_CHARSET
@@ -43,16 +43,18 @@ object frmVendas: TfrmVendas
     TabOrder = 0
   end
   object PainelTotal: TPanel
-    Left = 632
+    Left = 736
     Top = 61
-    Width = 738
-    Height = 641
+    Width = 634
+    Height = 554
     Align = alRight
     Color = clSilver
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 741
+    ExplicitTop = 52
     object Label8: TLabel
-      Left = 48
+      Left = 24
       Top = 133
       Width = 59
       Height = 19
@@ -65,7 +67,7 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 47
+      Left = 23
       Top = 245
       Width = 81
       Height = 19
@@ -78,7 +80,7 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object Buscar: TLabel
-      Left = 47
+      Left = 23
       Top = 77
       Width = 117
       Height = 19
@@ -91,7 +93,7 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 48
+      Left = 24
       Top = 193
       Width = 91
       Height = 19
@@ -105,16 +107,16 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object ImgProduto: TImage
-      Left = 189
-      Top = 220
-      Width = 241
-      Height = 220
+      Left = 136
+      Top = 245
+      Width = 209
+      Height = 188
       Stretch = True
     end
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 736
+      Width = 632
       Height = 66
       Align = alTop
       Caption = 'Total do Item'
@@ -127,9 +129,10 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 736
     end
     object txtBusca: TEdit
-      Left = 47
+      Left = 23
       Top = 102
       Width = 264
       Height = 21
@@ -137,18 +140,18 @@ object frmVendas: TfrmVendas
       OnChange = txtBuscaChange
     end
     object edtUnitario: TDBEdit
-      Left = 47
+      Left = 23
       Top = 218
-      Width = 130
+      Width = 100
       Height = 21
       DataField = 'VALOR'
       DataSource = DSConsultaProdutos
       TabOrder = 2
     end
     object EdtQuantidade: TDBEdit
-      Left = 47
+      Left = 23
       Top = 270
-      Width = 130
+      Width = 100
       Height = 21
       DataField = 'QUANTIDADE'
       DataSource = DSDetalheVenda
@@ -161,7 +164,7 @@ object frmVendas: TfrmVendas
       TabOrder = 3
     end
     object EdtProduto: TDBEdit
-      Left = 47
+      Left = 23
       Top = 158
       Width = 264
       Height = 21
@@ -171,13 +174,15 @@ object frmVendas: TfrmVendas
     end
     object Panel1: TPanel
       Left = 1
-      Top = 574
-      Width = 736
+      Top = 487
+      Width = 632
       Height = 66
       Align = alBottom
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
+      ExplicitTop = 574
+      ExplicitWidth = 736
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -206,13 +211,15 @@ object frmVendas: TfrmVendas
       end
     end
     object Panel2: TPanel
-      Left = 465
+      Left = 361
       Top = 67
       Width = 272
-      Height = 507
+      Height = 420
       Align = alRight
       Caption = 'Panel2'
       TabOrder = 6
+      ExplicitLeft = 465
+      ExplicitHeight = 507
       object Label4: TLabel
         Left = 23
         Top = 26
@@ -333,17 +340,19 @@ object frmVendas: TfrmVendas
   object painelGrid: TPanel
     Left = 0
     Top = 61
-    Width = 632
-    Height = 641
+    Width = 736
+    Height = 554
     Align = alClient
     Alignment = taLeftJustify
     Color = clActiveBorder
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 632
+    ExplicitHeight = 641
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 630
+      Width = 734
       Height = 66
       Align = alTop
       Caption = 'Itens adicionados'
@@ -356,12 +365,13 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 630
     end
     object DBItensVendidos: TDBGrid
-      Left = 211
+      Left = 205
       Top = 67
-      Width = 420
-      Height = 507
+      Width = 530
+      Height = 420
       Align = alClient
       DataSource = DSQueryDetVendas
       TabOrder = 1
@@ -397,13 +407,15 @@ object frmVendas: TfrmVendas
     end
     object PanelTotal: TPanel
       Left = 1
-      Top = 574
-      Width = 630
+      Top = 487
+      Width = 734
       Height = 66
       Align = alBottom
       Color = clTeal
       ParentBackground = False
       TabOrder = 2
+      ExplicitTop = 574
+      ExplicitWidth = 630
       object Label5: TLabel
         Left = 11
         Top = 20
@@ -434,8 +446,8 @@ object frmVendas: TfrmVendas
     object PanelMenu: TPanel
       Left = 1
       Top = 67
-      Width = 210
-      Height = 507
+      Width = 204
+      Height = 420
       Align = alLeft
       TabOrder = 3
       object Label10: TLabel

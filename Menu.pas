@@ -59,7 +59,7 @@ implementation
 
 {$R *.dfm}
 
-uses frmUsuarios, Funcionarios, Fornecedores,
+uses Funcionarios, Fornecedores,
   Vendas, Produtos,Cargos, Usuarios, EntradaEstoque,
   CertificadoDigital, SaidaEstoque, Login, ModuloDados;
 

@@ -188,22 +188,6 @@ var
 begin
 	AlimentarVendas;
 	DM.dataSetVendas.Post;
-
-	DM.QueryVenda.Close;
-	DM.QueryVenda.SQL.Clear;
-	DM.QueryVenda.SQL.Add('SELECT CODIGO,COD_FUNCIONARIO,DATA_VENDA,' +
-		'VALOR_TOTAL,HORA,FUNCIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO FROM VENDAS ORDER BY CODIGO ASC');
-	DM.QueryVenda.Open;
-
-	if not DM.QueryVenda.IsEmpty Then
-		Codigo := DM.QueryVenda.FieldByName('CODIGO').Value;
-
-	DM.QueryDetVenda.Close;
-	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add('UPDATE DETALHE_VENDA SET COD_VENDA = :Cod WHERE  COD_VENDA  = 0');
-	DM.QueryDetVenda.Parameters.ParamByName('Cod').Value := Codigo;
-	DM.QueryDetVenda.ExecSQL;
-
   DM.dataSetVendas.UpdateBatch();
   DM.DataSetDetVenda.UpdateBatch();
 
@@ -265,6 +249,7 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
+  //procedure adcionar itens
 end;
 
 procedure TfrmVendas.LimpaCampos;
