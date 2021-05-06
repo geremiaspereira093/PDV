@@ -107,8 +107,8 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object ImgProduto: TImage
-      Left = 136
-      Top = 245
+      Left = 129
+      Top = 257
       Width = 209
       Height = 188
       Stretch = True
