@@ -79,7 +79,6 @@
         <DCC_DcuOutput>.\Fontes</DCC_DcuOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>ProjPdv_Icon1.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -140,6 +139,10 @@
         </DCCReference>
         <DCCReference Include="Estoque\EntradaEstoque.pas">
             <Form>frmEntradaEstoque</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\ControleId.pas">
+            <Form>FrmIdTabelas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

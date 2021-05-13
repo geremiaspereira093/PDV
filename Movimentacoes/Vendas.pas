@@ -7,7 +7,7 @@ uses
 	System.Classes, Vcl.Graphics,
 	Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
 	Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, ACBrBase,
-	ACBrDFe, ACBrNFe, DateUtils, Vcl.MPlayer,Vcl.Imaging.jpeg;
+	ACBrDFe, ACBrNFe, DateUtils, Vcl.MPlayer,Vcl.Imaging.jpeg, Vcl.Menus;
 
 type
 	TSingentonQuantidade = class
@@ -67,8 +67,10 @@ type
     Label9: TLabel;
     Label16: TLabel;
     Label17: TLabel;
+    MainMenu1: TMainMenu;
+    Utilitrios1: TMenuItem;
+    ConfigurarBanco1: TMenuItem;
 		procedure FormCreate(Sender: TObject);
-		procedure ConsultaProdutos;
 		procedure AbateEstoque;
 		procedure IniciarNFE;
 		procedure txtBuscaChange(Sender: TObject);
@@ -84,6 +86,8 @@ type
     procedure LimpaCampos;
     procedure ExibeFoto(Campo:TField;ImgProd:TImage);
     procedure IniciarVenda;
+    procedure ConfigurarBanco1Click(Sender: TObject);
+    procedure ConsultaProdutos;
 
 	private
 		{ Private declarations }
@@ -101,7 +105,7 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados;
+uses ModuloDados, ControleId;
 
 procedure TfrmVendas.AbateEstoque;
 var
@@ -154,31 +158,17 @@ end;
 //	Result := Total;
 //end;
 
-procedure TfrmVendas.ConsultaProdutos;
-begin
-	DM.ConsultaProdutos.Close;
-	DM.ConsultaProdutos.SQL.Clear;
-	DM.ConsultaProdutos.SQL.Add('SELECT CODIGO,NOME,VALOR,DESCRICAO,DATA_FABRICACAO,DATA_VALIDADE,' +
-  'COD_FORN,QUANTIDADE,CODIGO_BARRAS, IMAGEM FROM PRODUTOS');
-	DM.ConsultaProdutos.SQL.Add('WHERE CODIGO_BARRAS =:CODIGO');
-	DM.ConsultaProdutos.Parameters.ParamByName('CODIGO').Value := trim(txtBusca.Text);
-	DM.ConsultaProdutos.Open;
-
-  ExibeFoto(DM.consultaProdutos.FieldByName('IMAGEM'),ImgProduto);
-	/// verifica se tem o produto a ser vendido
-	if not DM.ConsultaProdutos.IsEmpty Then
-	begin
-		DM.DataSetDetVenda.Append;
-		SalvaDetalheVenda;
-
-	end;
-
-end;
 
 procedure TfrmVendas.txtBuscaChange(Sender: TObject);
 begin
 	if txtBusca.Text <> '' then
 		ConsultaProdutos;
+end;
+
+procedure TfrmVendas.ConfigurarBanco1Click(Sender: TObject);
+begin
+	FrmIdTabelas := TFrmIdTAbelas.Create(nil);
+  FrmIdTabelas.Show;
 end;
 
 procedure TfrmVendas.ConfirmarVenda;
@@ -195,6 +185,25 @@ begin
 	/// CuponFiscal
   LimpaCampos;
   ListarItens;
+end;
+
+procedure TfrmVendas.ConsultaProdutos;
+begin
+	DM.ConsultaProdutos.Close;
+	DM.ConsultaProdutos.SQL.Clear;
+	DM.ConsultaProdutos.SQL.Add('SELECT CODIGO,NOME,VALOR,DESCRICAO,DATA_FABRICACAO,DATA_VALIDADE,' +
+  'COD_FORN,QUANTIDADE,CODIGO_BARRAS, IMAGEM FROM PRODUTOS');
+	DM.ConsultaProdutos.SQL.Add('WHERE CODIGO_BARRAS =:CODIGO');
+	DM.ConsultaProdutos.Parameters.ParamByName('CODIGO').Value := trim(txtBusca.Text);
+	DM.ConsultaProdutos.Open;
+  ExibeFoto(DM.consultaProdutos.FieldByName('IMAGEM'),ImgProduto);
+
+  if not DM.ConsultaProdutos.IsEmpty Then
+    begin
+      DM.DataSetDetVenda.Append;
+      SalvaDetalheVenda;
+    end;
+
 end;
 
 procedure TfrmVendas.FormCreate(Sender: TObject);
@@ -249,7 +258,6 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
-  //procedure adcionar itens
 end;
 
 procedure TfrmVendas.LimpaCampos;
@@ -295,12 +303,12 @@ begin
 	 Qtde := TSingentonQuantidade.GetInstance;
 	 ValorTotal := Qtde.Totalizar(Quantidade,ValorUnitario);
 
- //	ValorTotal := Totalizar(Quantidade, ValorUnitario);
+
 
 	// pegando o produto pesquisado
 	Produto := DM.ConsultaProdutos.FieldByName('NOME').Value;
 	EdtProduto.Text := Produto;
- //	DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := DM.dataSetVendas.FieldByName('CODIGO').Value;
+
   DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := 0;
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;

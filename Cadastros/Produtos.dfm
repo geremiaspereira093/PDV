@@ -434,7 +434,6 @@ object frmProdutos: TfrmProdutos
           item
             Expanded = False
             FieldName = 'DATA_VALIDADE'
-            Width = 64
             Visible = True
           end
           item
@@ -446,7 +445,6 @@ object frmProdutos: TfrmProdutos
           item
             Expanded = False
             FieldName = 'CODIGO_BARRAS'
-            Width = 64
             Visible = True
           end>
       end
@@ -1106,7 +1104,6 @@ object frmProdutos: TfrmProdutos
           item
             Expanded = False
             FieldName = 'CODIGO_BARRAS'
-            Width = 64
             Visible = True
           end>
       end
@@ -1295,7 +1292,7 @@ object frmProdutos: TfrmProdutos
     DataPipeline = PipeLineEtiquetas
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

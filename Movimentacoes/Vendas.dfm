@@ -12,6 +12,7 @@ object frmVendas: TfrmVendas
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
+  Menu = MainMenu1
   OldCreateOrder = False
   Position = poDesigned
   WindowState = wsMaximized
@@ -51,8 +52,6 @@ object frmVendas: TfrmVendas
     Color = clSilver
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 741
-    ExplicitTop = 52
     object Label8: TLabel
       Left = 24
       Top = 133
@@ -129,7 +128,6 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 736
     end
     object txtBusca: TEdit
       Left = 23
@@ -181,8 +179,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
-      ExplicitTop = 574
-      ExplicitWidth = 736
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -218,8 +214,6 @@ object frmVendas: TfrmVendas
       Align = alRight
       Caption = 'Panel2'
       TabOrder = 6
-      ExplicitLeft = 465
-      ExplicitHeight = 507
       object Label4: TLabel
         Left = 23
         Top = 26
@@ -347,8 +341,6 @@ object frmVendas: TfrmVendas
     Color = clActiveBorder
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 632
-    ExplicitHeight = 641
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -365,7 +357,6 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 630
     end
     object DBItensVendidos: TDBGrid
       Left = 205
@@ -414,8 +405,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 574
-      ExplicitWidth = 630
       object Label5: TLabel
         Left = 11
         Top = 20
@@ -565,5 +554,16 @@ object frmVendas: TfrmVendas
   object Timer1: TTimer
     Left = 1453
     Top = 605
+  end
+  object MainMenu1: TMainMenu
+    Left = 350
+    Top = 10
+    object Utilitrios1: TMenuItem
+      Caption = 'Utilit'#225'rios'
+      object ConfigurarBanco1: TMenuItem
+        Caption = 'Configurar Banco'
+        OnClick = ConfigurarBanco1Click
+      end
+    end
   end
 end

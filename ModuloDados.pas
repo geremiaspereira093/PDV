@@ -164,6 +164,7 @@ type
     QueryDetVendaVALOR_TOTAL: TBCDField;
     consultaProdutosVALOR: TBCDField;
     consultaProdutosIMAGEM: TBlobField;
+    DataSetId: TADODataSet;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

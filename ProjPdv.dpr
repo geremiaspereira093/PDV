@@ -14,7 +14,8 @@ uses
   CertificadoDigital in 'Movimentacoes\CertificadoDigital.pas' {frmCertificados},
   CuponFiscal in 'Movimentacoes\CuponFiscal.pas' {frmCupomFiscal},
   SaidaEstoque in 'Estoque\SaidaEstoque.pas' {frmSaiEstoque},
-  EntradaEstoque in 'Estoque\EntradaEstoque.pas' {frmEntradaEstoque};
+  EntradaEstoque in 'Estoque\EntradaEstoque.pas' {frmEntradaEstoque},
+  ControleId in 'Movimentacoes\ControleId.pas' {FrmIdTabelas};
 
 {$R *.res}
 

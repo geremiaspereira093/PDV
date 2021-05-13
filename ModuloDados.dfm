@@ -548,7 +548,7 @@ object DM: TDM
     PrinterSetup.mmMarginTop = 6350
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
-    PrinterSetup.PaperSize = 9
+    PrinterSetup.PaperSize = 256
     Template.FileName = 
       'C:\Users\Programacao04\Desktop\PDV\Relatorios\RelatorioVendas.rt' +
       'm'
@@ -588,7 +588,7 @@ object DM: TDM
     RTFSettings.DefaultFont.Name = 'Arial'
     RTFSettings.DefaultFont.Style = []
     TextFileName = '($MyDocuments)\Report.pdf'
-    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.DefaultString = '<Texto a localizar>'
     TextSearchSettings.Enabled = True
     XLSSettings.AppName = 'ReportBuilder'
     XLSSettings.Author = 'ReportBuilder'
@@ -1316,15 +1316,16 @@ object DM: TDM
     end
   end
   object conexaoBanco: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=SQLNCLI11.1;Integrated Security=SSPI;Persist Security I' +
-      'nfo=False;User ID="";Initial Catalog=PDV_GERE;Data Source=DESKTO' +
-      'P-66VQ1V5;Use Procedure for Prepare=1;Auto Translate=True;Packet' +
-      ' Size=4096;Workstation ID=DESKTOP-66VQ1V5;Initial File Name="";U' +
-      'se Encryption for Data=False;Tag with column collation when poss' +
-      'ible=False;MARS Connection=False;DataTypeCompatibility=0;Trust S' +
-      'erver Certificate=False;Server SPN=DESKTOP-66VQ1V5;Application I' +
-      'ntent=READWRITE'
+      'nfo=False;User ID="";Initial Catalog=PDV_GERE;Data Source=PROGRA' +
+      'MACAO04\SQLEXPRESS01;Use Procedure for Prepare=1;Auto Translate=' +
+      'True;Packet Size=4096;Workstation ID=DESKTOP-66VQ1V5;Initial Fil' +
+      'e Name="";Use Encryption for Data=False;Tag with column collatio' +
+      'n when possible=False;MARS Connection=False;DataTypeCompatibilit' +
+      'y=0;Trust Server Certificate=False;Server SPN=PROGRAMACAO04\SQLE' +
+      'XPRESS01;Application Intent=READWRITE'
     LoginPrompt = False
     Provider = 'SQLNCLI11.1'
     Left = 221
@@ -1452,5 +1453,12 @@ object DM: TDM
       DisplayFormat = '###.00,'
       Precision = 19
     end
+  end
+  object DataSetId: TADODataSet
+    Connection = conexaoBanco
+    CommandText = 'SELECT ID, TABELA FROM CONTROLA_ID'
+    Parameters = <>
+    Left = 410
+    Top = 340
   end
 end
