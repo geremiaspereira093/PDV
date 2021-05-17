@@ -340,9 +340,9 @@ begin
   DM.QueryId.ExecSQL;
 
   DM.DataSetDetVenda.FieldByName('CODIGO').Value := Codigo;
-  ////////////////////////////////////////////////////////////
+
   DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Codigo;
-  /////////////////////////////////////////////////////////////
+
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;
@@ -370,6 +370,7 @@ begin
 
 	Qtde:= TSingentonQuantidade.GetInstance;
 	ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
+
  	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Codigo;
   EdtTotalVenda.Text := CurrToStr(ValorTotal);
 	EdtData.Text := DateToStr(Now);

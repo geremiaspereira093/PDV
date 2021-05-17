@@ -104,7 +104,7 @@ object frmVendas: TfrmVendas
         item
           Expanded = False
           FieldName = 'VALOR_TOTAL'
-          Width = 127
+          Width = 187
           Visible = True
         end>
     end
