@@ -406,7 +406,6 @@ object DM: TDM
     Left = 414
     Top = 92
     object dataSetVendasCODIGO: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
       FieldName = 'CODIGO'
       ReadOnly = True
     end
@@ -595,8 +594,8 @@ object DM: TDM
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 415
-    Top = 393
+    Left = 120
+    Top = 473
     Version = '19.03'
     mmColumnWidth = 0
     DataPipelineName = 'PipelineRelatorioVendas'
@@ -1086,8 +1085,8 @@ object DM: TDM
   object PipelineRelatorioVendas: TppDBPipeline
     DataSource = DataSourceRelatorioVendas
     UserName = 'PipelineRelatorioVendas'
-    Left = 305
-    Top = 395
+    Left = 30
+    Top = 455
     object PipelineRelatorioVendasppField1: TppField
       FieldAlias = 'NOME'
       FieldName = 'NOME'
@@ -1336,11 +1335,15 @@ object DM: TDM
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 
-      'SELECT COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VALOR_TOTA' +
-      'L'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
+      'SELECT CODIGO, COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VA' +
+      'LOR_TOTAL'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
     Parameters = <>
     Left = 413
     Top = 152
+    object DataSetDetVendaCODIGO: TAutoIncField
+      FieldName = 'CODIGO'
+      ReadOnly = True
+    end
     object DataSetDetVendaCOD_VENDA: TIntegerField
       FieldName = 'COD_VENDA'
     end
@@ -1460,5 +1463,23 @@ object DM: TDM
     Parameters = <>
     Left = 410
     Top = 340
+  end
+  object QueryId: TADOQuery
+    Connection = conexaoBanco
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT ID, TABELA FROM CONTROLA_ID')
+    Left = 415
+    Top = 405
+    object QueryIdID: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'ID'
+    end
+    object QueryIdTABELA: TStringField
+      DisplayLabel = 'Tabela'
+      FieldName = 'TABELA'
+      Size = 60
+    end
   end
 end

@@ -128,7 +128,6 @@ type
     DataSetCadastroFornecedorNOME: TStringField;
     DataSetCadastroFornecedorCNPJ: TStringField;
     conexaoBanco: TADOConnection;
-    dataSetVendasCODIGO: TAutoIncField;
     dataSetVendasCOD_FUNCIONARIO: TIntegerField;
     dataSetVendasDATA_VENDA: TDateField;
     dataSetVendasVALOR_TOTAL: TBCDField;
@@ -165,6 +164,11 @@ type
     consultaProdutosVALOR: TBCDField;
     consultaProdutosIMAGEM: TBlobField;
     DataSetId: TADODataSet;
+    QueryId: TADOQuery;
+    QueryIdID: TIntegerField;
+    QueryIdTABELA: TStringField;
+    DataSetDetVendaCODIGO: TAutoIncField;
+    dataSetVendasCODIGO: TAutoIncField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

@@ -212,7 +212,6 @@ object frmVendas: TfrmVendas
       Width = 272
       Height = 420
       Align = alRight
-      Caption = 'Panel2'
       TabOrder = 6
       object Label4: TLabel
         Left = 23

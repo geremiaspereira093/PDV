@@ -234,6 +234,7 @@ begin
   begin
     //informar nova quantidade
   end
+
    //Finalizar a venda atual
 	else if Key = VK_F3 Then
 	begin
@@ -279,8 +280,8 @@ procedure TfrmVendas.ListarItens;
 begin
 	DM.QueryDetVenda.Close;
 	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add
-		('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL'+
+	'FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
 	DM.QueryDetVenda.Open;
 
 	DBItensVendidos.Columns[0].Alignment := taCenter;
@@ -293,6 +294,8 @@ var
 	Produto: String;
 	ValorTotal: Currency;
 	Qtde: TSingentonQuantidade;
+  Tabela:String;
+  Codigo : Integer;
 begin
 	Quantidade := 1.00;
 	ValorUnitario := StrToCurr(edtUnitario.Text);
@@ -303,13 +306,24 @@ begin
 	 Qtde := TSingentonQuantidade.GetInstance;
 	 ValorTotal := Qtde.Totalizar(Quantidade,ValorUnitario);
 
-
-
 	// pegando o produto pesquisado
 	Produto := DM.ConsultaProdutos.FieldByName('NOME').Value;
 	EdtProduto.Text := Produto;
 
-  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := 0;
+  //pegar o ids dos itens
+  Tabela := 'DETALHE_VENDA';
+  Codigo :=0;
+  Codigo := Codigo + Codigo +1;
+
+	DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = :CODIGO WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.ExecSQL;
+
+  DM.DataSetDetVenda.FieldByName('CODIGO').Value := Codigo;
+  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Codigo;
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;
@@ -321,20 +335,28 @@ procedure TfrmVendas.AlimentarVendas;
 var
 	ValorTotal: Currency;
 	Qtde: TSingentonQuantidade;
+  Tabela : String;
+  Codigo :Integer;
 begin
+	Codigo := 0;
+	Tabela := 'VENDA';
+  Codigo := Codigo + Codigo +1;
 
-	 Qtde:= TSingentonQuantidade.GetInstance;
-	 ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
+	DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = :CODIGO WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.ExecSQL;
 
-	//ValorTotal := Totalizar(Quantidade, ValorUnitario);
-
-	EdtTotalVenda.Text := CurrToStr(ValorTotal);
+	Qtde:= TSingentonQuantidade.GetInstance;
+	ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
+  DM.dataSetVendas.FieldByName('CODIGO').Value :=  Codigo;
+  EdtTotalVenda.Text := CurrToStr(ValorTotal);
 	EdtData.Text := DateToStr(Now);
 	EdtHora.Text := TimeToStr(Now);
-	DM.dataSetVendas.FieldByName('COD_FUNCIONARIO').Value :=
-  DM.consultaFunc.FieldByName('CODIGO').Value;
-	DM.dataSetVendas.FieldByName('FUNCIONARIO').Value :=
-  DM.consultaUsuarios.FieldByName('USUARIO').Value;
+	DM.dataSetVendas.FieldByName('COD_FUNCIONARIO').Value := DM.consultaFunc.FieldByName('CODIGO').Value;
+	DM.dataSetVendas.FieldByName('FUNCIONARIO').Value := DM.consultaUsuarios.FieldByName('USUARIO').Value;
 end;
 
 procedure TfrmVendas.ExibeFoto(Campo: TField; ImgProd: TImage);
