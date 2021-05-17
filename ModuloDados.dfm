@@ -400,14 +400,13 @@ object DM: TDM
     AfterCancel = dataSetVendasAfterCancel
     CommandText = 
       'SELECT CODIGO,COD_FUNCIONARIO,DATA_VENDA,VALOR_TOTAL, HORA,'#13#10'FUN' +
-      'CIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO  FROM VENDAS WHERE CODIGO' +
-      ' = NULL'#13#10#13#10
+      'CIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO  FROM VENDA WHERE CODIGO ' +
+      '= NULL'#13#10#13#10
     Parameters = <>
-    Left = 414
-    Top = 92
+    Left = 409
+    Top = 97
     object dataSetVendasCODIGO: TAutoIncField
       FieldName = 'CODIGO'
-      ReadOnly = True
     end
     object dataSetVendasDATA_VENDA: TDateField
       DisplayLabel = 'Data da Venda'
@@ -538,7 +537,7 @@ object DM: TDM
     DataPipeline = PipelineRelatorioVendas
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'Custom'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1335,17 +1334,19 @@ object DM: TDM
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 
-      'SELECT CODIGO, COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VA' +
-      'LOR_TOTAL'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
+      'SELECT CODIGO,COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VAL' +
+      'OR_TOTAL'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
     Parameters = <>
     Left = 413
-    Top = 152
+    Top = 157
     object DataSetDetVendaCODIGO: TAutoIncField
       FieldName = 'CODIGO'
-      ReadOnly = True
     end
     object DataSetDetVendaCOD_VENDA: TIntegerField
       FieldName = 'COD_VENDA'
+      LookupDataSet = dataSetVendas
+      LookupKeyFields = 'CODIGO'
+      LookupResultField = 'CODIGO'
     end
     object DataSetDetVendaPRODUTO: TStringField
       FieldName = 'PRODUTO'

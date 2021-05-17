@@ -167,8 +167,8 @@ type
     QueryId: TADOQuery;
     QueryIdID: TIntegerField;
     QueryIdTABELA: TStringField;
-    DataSetDetVendaCODIGO: TAutoIncField;
     dataSetVendasCODIGO: TAutoIncField;
+    DataSetDetVendaCODIGO: TAutoIncField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

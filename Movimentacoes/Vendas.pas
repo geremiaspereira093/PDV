@@ -20,14 +20,6 @@ type
 
 	TfrmVendas = class(TForm)
 		painelTopo: TPanel;
-		PainelTotal: TPanel;
-		Panel5: TPanel;
-		Label8: TLabel;
-		Label12: TLabel;
-		Buscar: TLabel;
-		txtBusca: TEdit;
-		Label1: TLabel;
-		edtUnitario: TDBEdit;
 		srcVendas: TDataSource;
 		SrcQueryVendas: TDataSource;
 		DSConsultaProdutos: TDataSource;
@@ -35,10 +27,6 @@ type
 		DSDetalheVenda: TDataSource;
 		Label11: TLabel;
 		DSQueryDetVendas: TDataSource;
-		EdtQuantidade: TDBEdit;
-		EdtProduto: TDBEdit;
-    ImgProduto: TImage;
-		Panel1: TPanel;
     painelGrid: TPanel;
     Panel3: TPanel;
     DBItensVendidos: TDBGrid;
@@ -51,25 +39,37 @@ type
     Label14: TLabel;
     Panel4: TPanel;
     Label15: TLabel;
-    Panel2: TPanel;
-    Label4: TLabel;
-    EdtTotalVenda: TDBEdit;
-    Label6: TLabel;
-    EdtValorRecebido: TDBEdit;
-    Label7: TLabel;
-    EdtTroco: TDBEdit;
-    Label3: TLabel;
-    EdtData: TDBEdit;
-    Label2: TLabel;
-    EdtHora: TDBEdit;
     Timer1: TTimer;
-    Label9: TLabel;
-    Label16: TLabel;
     Label17: TLabel;
     MainMenu1: TMainMenu;
     Utilitrios1: TMenuItem;
     ConfigurarBanco1: TMenuItem;
     DataSource1: TDataSource;
+    PainelTotal: TPanel;
+    Label8: TLabel;
+    Label12: TLabel;
+    Buscar: TLabel;
+    Label1: TLabel;
+    ImgProduto: TImage;
+    Panel5: TPanel;
+    txtBusca: TEdit;
+    edtUnitario: TDBEdit;
+    EdtQuantidade: TDBEdit;
+    EdtProduto: TDBEdit;
+    Panel1: TPanel;
+    Label9: TLabel;
+    Label16: TLabel;
+    Panel2: TPanel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label3: TLabel;
+    Label2: TLabel;
+    EdtTotalVenda: TDBEdit;
+    EdtValorRecebido: TDBEdit;
+    EdtTroco: TDBEdit;
+    EdtData: TDBEdit;
+    EdtHora: TDBEdit;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure IniciarNFE;
@@ -141,7 +141,6 @@ begin
 	DM.DataSetDetVenda.Post;
 	ListarItens;
 	CalcularSubTotal;
-
 	AbateEstoque;
 	LimparProdutos;
 end;
@@ -217,6 +216,7 @@ begin
 
   if not DM.ConsultaProdutos.IsEmpty Then
     begin
+    	DM.DataSetDetVenda.Append;
       SalvaDetalheVenda;
     end;
 
@@ -276,7 +276,7 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
-  DM.DataSetDetVenda.Append;
+
 end;
 
 procedure TfrmVendas.LimpaCampos;
@@ -298,8 +298,7 @@ procedure TfrmVendas.ListarItens;
 begin
 	DM.QueryDetVenda.Close;
 	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL'+
-	'FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
 	DM.QueryDetVenda.Open;
 
 	DBItensVendidos.Columns[0].Alignment := taCenter;
@@ -341,7 +340,9 @@ begin
   DM.QueryId.ExecSQL;
 
   DM.DataSetDetVenda.FieldByName('CODIGO').Value := Codigo;
+  ////////////////////////////////////////////////////////////
   DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Codigo;
+  /////////////////////////////////////////////////////////////
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;
@@ -369,7 +370,7 @@ begin
 
 	Qtde:= TSingentonQuantidade.GetInstance;
 	ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
-  DM.dataSetVendas.FieldByName('CODIGO').Value :=  Codigo;
+ 	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Codigo;
   EdtTotalVenda.Text := CurrToStr(ValorTotal);
 	EdtData.Text := DateToStr(Now);
 	EdtHora.Text := TimeToStr(Now);

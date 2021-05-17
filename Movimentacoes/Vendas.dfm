@@ -42,8 +42,190 @@ object frmVendas: TfrmVendas
     Color = clSilver
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 1
-    ExplicitTop = -5
+  end
+  object painelGrid: TPanel
+    Left = 0
+    Top = 61
+    Width = 812
+    Height = 624
+    Align = alClient
+    Alignment = taLeftJustify
+    Color = clActiveBorder
+    ParentBackground = False
+    TabOrder = 1
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 810
+      Height = 66
+      Align = alTop
+      Caption = 'Itens adicionados'
+      Color = clTeal
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Times New Roman'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object DBItensVendidos: TDBGrid
+      Left = 205
+      Top = 67
+      Width = 606
+      Height = 490
+      Align = alClient
+      DataSource = DSQueryDetVendas
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'PRODUTO'
+          Width = 205
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QUANTIDADE'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Width = 64
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_TOTAL'
+          Width = 127
+          Visible = True
+        end>
+    end
+    object PanelTotal: TPanel
+      Left = 1
+      Top = 557
+      Width = 810
+      Height = 66
+      Align = alBottom
+      Color = clTeal
+      ParentBackground = False
+      TabOrder = 2
+      object Label5: TLabel
+        Left = 11
+        Top = 20
+        Width = 102
+        Height = 42
+        Caption = 'Total: '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -37
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object LblTotal: TLabel
+        Left = 116
+        Top = 20
+        Width = 19
+        Height = 42
+        Caption = '0'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -37
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object PanelMenu: TPanel
+      Left = 1
+      Top = 67
+      Width = 204
+      Height = 490
+      Align = alLeft
+      TabOrder = 3
+      object Label10: TLabel
+        Left = 8
+        Top = 145
+        Width = 189
+        Height = 24
+        Caption = 'Finalizar Venda  [F3]'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label13: TLabel
+        Left = 6
+        Top = 226
+        Width = 191
+        Height = 24
+        Caption = 'Cancelar Venda  [F4]'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label14: TLabel
+        Left = 11
+        Top = 62
+        Width = 162
+        Height = 24
+        Caption = 'Iniciar Venda [F2]'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label17: TLabel
+        Left = 6
+        Top = 301
+        Width = 158
+        Height = 24
+        Caption = ' Quantidade  [F5]'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 67
+      Width = 210
+      Height = 41
+      Color = clTeal
+      ParentBackground = False
+      TabOrder = 4
+      object Label15: TLabel
+        Left = 82
+        Top = 11
+        Width = 47
+        Height = 22
+        Caption = 'Menu'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
   end
   object PainelTotal: TPanel
     Left = 812
@@ -53,9 +235,7 @@ object frmVendas: TfrmVendas
     Align = alRight
     Color = clSilver
     ParentBackground = False
-    TabOrder = 1
-    ExplicitLeft = 817
-    ExplicitTop = 57
+    TabOrder = 2
     object Label8: TLabel
       Left = 24
       Top = 133
@@ -134,7 +314,7 @@ object frmVendas: TfrmVendas
       TabOrder = 0
     end
     object txtBusca: TEdit
-      Left = 23
+      Left = 24
       Top = 102
       Width = 264
       Height = 21
@@ -183,7 +363,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
-      ExplicitTop = 487
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -218,7 +397,6 @@ object frmVendas: TfrmVendas
       Height = 490
       Align = alRight
       TabOrder = 6
-      ExplicitTop = 73
       object Label4: TLabel
         Left = 23
         Top = 26
@@ -333,196 +511,6 @@ object frmVendas: TfrmVendas
         DataField = 'HORA'
         DataSource = srcVendas
         TabOrder = 4
-      end
-    end
-  end
-  object painelGrid: TPanel
-    Left = 0
-    Top = 61
-    Width = 812
-    Height = 624
-    Align = alClient
-    Alignment = taLeftJustify
-    Color = clActiveBorder
-    ParentBackground = False
-    TabOrder = 2
-    ExplicitWidth = 736
-    ExplicitHeight = 554
-    object Panel3: TPanel
-      Left = 1
-      Top = 1
-      Width = 810
-      Height = 66
-      Align = alTop
-      Caption = 'Itens adicionados'
-      Color = clTeal
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Times New Roman'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentFont = False
-      TabOrder = 0
-      ExplicitWidth = 734
-    end
-    object DBItensVendidos: TDBGrid
-      Left = 205
-      Top = 67
-      Width = 606
-      Height = 490
-      Align = alClient
-      DataSource = DSQueryDetVendas
-      TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'PRODUTO'
-          Width = 205
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'QUANTIDADE'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'VALOR'
-          Width = 64
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'VALOR_TOTAL'
-          Width = 127
-          Visible = True
-        end>
-    end
-    object PanelTotal: TPanel
-      Left = 1
-      Top = 557
-      Width = 810
-      Height = 66
-      Align = alBottom
-      Color = clTeal
-      ParentBackground = False
-      TabOrder = 2
-      ExplicitTop = 487
-      ExplicitWidth = 734
-      object Label5: TLabel
-        Left = 11
-        Top = 20
-        Width = 102
-        Height = 42
-        Caption = 'Total: '
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -37
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object LblTotal: TLabel
-        Left = 116
-        Top = 20
-        Width = 19
-        Height = 42
-        Caption = '0'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -37
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-    end
-    object PanelMenu: TPanel
-      Left = 1
-      Top = 67
-      Width = 204
-      Height = 490
-      Align = alLeft
-      TabOrder = 3
-      ExplicitHeight = 420
-      object Label10: TLabel
-        Left = 8
-        Top = 145
-        Width = 189
-        Height = 24
-        Caption = 'Finalizar Venda  [F3]'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -21
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label13: TLabel
-        Left = 6
-        Top = 226
-        Width = 191
-        Height = 24
-        Caption = 'Cancelar Venda  [F4]'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -21
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label14: TLabel
-        Left = 11
-        Top = 62
-        Width = 162
-        Height = 24
-        Caption = 'Iniciar Venda [F2]'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -21
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label17: TLabel
-        Left = 6
-        Top = 301
-        Width = 158
-        Height = 24
-        Caption = ' Quantidade  [F5]'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -21
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-    end
-    object Panel4: TPanel
-      Left = 1
-      Top = 67
-      Width = 210
-      Height = 41
-      Color = clTeal
-      ParentBackground = False
-      TabOrder = 4
-      object Label15: TLabel
-        Left = 82
-        Top = 11
-        Width = 47
-        Height = 22
-        Caption = 'Menu'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
       end
     end
   end
