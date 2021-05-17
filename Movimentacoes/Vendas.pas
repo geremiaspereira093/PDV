@@ -58,7 +58,7 @@ type
     EdtProduto: TDBEdit;
     Panel1: TPanel;
     Label9: TLabel;
-    Label16: TLabel;
+    LblTroco: TLabel;
     Panel2: TPanel;
     Label4: TLabel;
     Label6: TLabel;
@@ -90,6 +90,7 @@ type
     procedure ConsultaProdutos;
     procedure srcVendasStateChange(Sender: TObject);
     procedure CarregarFoto;
+    procedure DarTroco;
 
 	private
 		{ Private declarations }
@@ -107,7 +108,7 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados, ControleId;
+uses ModuloDados, ControleId, NovaQtde;
 
 procedure TfrmVendas.CarregarFoto;
 var
@@ -149,6 +150,7 @@ procedure TfrmVendas.srcVendasStateChange(Sender: TObject);
 begin
 	txtBusca.Enabled := ( DM.dataSetVendas.State in [dsInsert] );
 	if DM.dataSetVendas.State in [dsBrowse] Then
+  	//depois alterar para subir uma tela caixa ocupado
   	txtBusca.Enabled := False;
 end;
 
@@ -193,6 +195,7 @@ var
 	CodigoFuncionario: Integer;
 begin
 	AlimentarVendas;
+  DarTroco;
 	DM.dataSetVendas.Post;
   DM.dataSetVendas.UpdateBatch();
   DM.DataSetDetVenda.UpdateBatch();
@@ -222,6 +225,19 @@ begin
 
 end;
 
+procedure TfrmVendas.DarTroco;
+var
+	ValorTotal:Currency;
+  ValorRecebido: Currency;
+  Troco:Currency;
+begin
+   ValorRecebido := StrToCurr(EdtValorRecebido.Text);
+   ValorTotal := StrToCurr(EdtTotalVenda.Text);
+   Troco := ValorRecebido - ValorTotal;
+   EdtTroco.Text := CurrToStr(Troco);
+   LblTroco.Caption :=  FormatFloat('###.00,', Troco);
+end;
+
 procedure TfrmVendas.FormCreate(Sender: TObject);
 begin
 	DM.ConsultaProdutos.Active := True;
@@ -249,7 +265,12 @@ begin
 	end
   else if Key = VK_F5 Then
   begin
-    //informar nova quantidade
+    FrmQuantidade := TFrmQuantidade.Create(nil);
+    try
+    	FrmQuantidade.ShowModal;
+    finally
+      FrmQuantidade.Free;
+    end;
   end
 
    //Finalizar a venda atual
@@ -334,7 +355,7 @@ begin
 
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = :CODIGO WHERE TABELA = :TABELA');
+  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
   DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
   DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
   DM.QueryId.ExecSQL;
@@ -356,6 +377,7 @@ var
 	Qtde: TSingentonQuantidade;
   Tabela : String;
   Codigo :Integer;
+  Id: Integer;
 begin
 	Codigo := 0;
 	Tabela := 'VENDA';
@@ -363,7 +385,7 @@ begin
 
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = :CODIGO WHERE TABELA = :TABELA');
+  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
   DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
   DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
   DM.QueryId.ExecSQL;
@@ -371,7 +393,17 @@ begin
 	Qtde:= TSingentonQuantidade.GetInstance;
 	ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
 
- 	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Codigo;
+//  FAZER UM SELECT PARA PEGAR O CODIGO
+	DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('SELECT ID FROM CONTROLA_ID WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.Open;
+
+	if not DM.QueryId.IsEmpty Then
+  	Id := DM.QueryIdID;
+
+ 	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Id;
   EdtTotalVenda.Text := CurrToStr(ValorTotal);
 	EdtData.Text := DateToStr(Now);
 	EdtHora.Text := TimeToStr(Now);

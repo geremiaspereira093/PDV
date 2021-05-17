@@ -3,7 +3,7 @@ object frmVendas: TfrmVendas
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Vendas'
-  ClientHeight = 685
+  ClientHeight = 680
   ClientWidth = 1446
   Color = clMedGray
   Font.Charset = DEFAULT_CHARSET
@@ -47,12 +47,13 @@ object frmVendas: TfrmVendas
     Left = 0
     Top = 61
     Width = 812
-    Height = 624
+    Height = 619
     Align = alClient
     Alignment = taLeftJustify
     Color = clActiveBorder
     ParentBackground = False
     TabOrder = 1
+    ExplicitHeight = 624
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -63,18 +64,20 @@ object frmVendas: TfrmVendas
       Color = clTeal
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -21
       Font.Name = 'Times New Roman'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      ExplicitLeft = -3
+      ExplicitTop = 6
     end
     object DBItensVendidos: TDBGrid
       Left = 205
       Top = 67
       Width = 606
-      Height = 490
+      Height = 485
       Align = alClient
       DataSource = DSQueryDetVendas
       TabOrder = 1
@@ -110,13 +113,14 @@ object frmVendas: TfrmVendas
     end
     object PanelTotal: TPanel
       Left = 1
-      Top = 557
+      Top = 552
       Width = 810
       Height = 66
       Align = alBottom
       Color = clTeal
       ParentBackground = False
       TabOrder = 2
+      ExplicitTop = 557
       object Label5: TLabel
         Left = 11
         Top = 20
@@ -148,9 +152,10 @@ object frmVendas: TfrmVendas
       Left = 1
       Top = 67
       Width = 204
-      Height = 490
+      Height = 485
       Align = alLeft
       TabOrder = 3
+      ExplicitHeight = 490
       object Label10: TLabel
         Left = 8
         Top = 145
@@ -231,69 +236,72 @@ object frmVendas: TfrmVendas
     Left = 812
     Top = 61
     Width = 634
-    Height = 624
+    Height = 619
     Align = alRight
     Color = clSilver
     ParentBackground = False
     TabOrder = 2
+    ExplicitLeft = 804
+    ExplicitTop = 67
+    ExplicitHeight = 624
     object Label8: TLabel
       Left = 24
-      Top = 133
-      Width = 59
-      Height = 19
+      Top = 163
+      Width = 81
+      Height = 24
       Caption = 'Produtos'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -21
       Font.Name = 'Times New Roman'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Label12: TLabel
       Left = 23
-      Top = 245
-      Width = 81
-      Height = 19
+      Top = 302
+      Width = 109
+      Height = 24
       Caption = 'Quantidade '
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -21
       Font.Name = 'Times New Roman'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Buscar: TLabel
       Left = 23
-      Top = 77
-      Width = 117
-      Height = 19
+      Top = 93
+      Width = 156
+      Height = 24
       Caption = 'C'#243'digo de Barras'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -21
       Font.Name = 'Times New Roman'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Label1: TLabel
       Left = 24
-      Top = 193
-      Width = 91
-      Height = 19
+      Top = 230
+      Width = 122
+      Height = 24
       Caption = 'Valor unit'#225'rio'
       FocusControl = edtUnitario
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -21
       Font.Name = 'Times New Roman'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object ImgProduto: TImage
-      Left = 139
-      Top = 270
-      Width = 209
-      Height = 188
+      Left = 19
+      Top = 390
+      Width = 197
+      Height = 152
       Stretch = True
     end
     object Panel5: TPanel
@@ -306,7 +314,7 @@ object frmVendas: TfrmVendas
       Color = clTeal
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -21
       Font.Name = 'Times New Roman'
       Font.Style = [fsBold]
       ParentBackground = False
@@ -315,16 +323,16 @@ object frmVendas: TfrmVendas
     end
     object txtBusca: TEdit
       Left = 24
-      Top = 102
-      Width = 264
+      Top = 125
+      Width = 186
       Height = 21
       TabOrder = 1
       OnChange = txtBuscaChange
     end
     object edtUnitario: TDBEdit
-      Left = 23
-      Top = 218
-      Width = 100
+      Left = 24
+      Top = 262
+      Width = 186
       Height = 21
       DataField = 'VALOR'
       DataSource = DSConsultaProdutos
@@ -332,8 +340,8 @@ object frmVendas: TfrmVendas
     end
     object EdtQuantidade: TDBEdit
       Left = 23
-      Top = 270
-      Width = 100
+      Top = 340
+      Width = 186
       Height = 21
       DataField = 'QUANTIDADE'
       DataSource = DSDetalheVenda
@@ -347,8 +355,8 @@ object frmVendas: TfrmVendas
     end
     object EdtProduto: TDBEdit
       Left = 23
-      Top = 158
-      Width = 264
+      Top = 195
+      Width = 186
       Height = 21
       DataField = 'PRODUTO'
       DataSource = DSDetalheVenda
@@ -356,13 +364,15 @@ object frmVendas: TfrmVendas
     end
     object Panel1: TPanel
       Left = 1
-      Top = 557
+      Top = 552
       Width = 632
       Height = 66
       Align = alBottom
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
+      ExplicitLeft = 5
+      ExplicitTop = 557
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -376,8 +386,8 @@ object frmVendas: TfrmVendas
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label16: TLabel
-        Left = 110
+      object LblTroco: TLabel
+        Left = 112
         Top = 20
         Width = 19
         Height = 42
@@ -394,81 +404,83 @@ object frmVendas: TfrmVendas
       Left = 361
       Top = 67
       Width = 272
-      Height = 490
+      Height = 485
       Align = alRight
       TabOrder = 6
+      ExplicitTop = 61
+      ExplicitHeight = 490
       object Label4: TLabel
-        Left = 23
+        Left = 20
         Top = 26
-        Width = 115
-        Height = 26
+        Width = 98
+        Height = 24
         Caption = 'Valor Total'
         FocusControl = EdtTotalVenda
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 23
-        Top = 121
-        Width = 158
-        Height = 26
+        Left = 20
+        Top = 96
+        Width = 136
+        Height = 24
         Caption = 'Valor Recebido'
         FocusControl = EdtValorRecebido
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object Label7: TLabel
         Left = 20
-        Top = 213
-        Width = 59
-        Height = 26
+        Top = 163
+        Width = 51
+        Height = 24
         Caption = 'Troco'
         FocusControl = EdtTroco
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 19
-        Top = 295
-        Width = 111
-        Height = 26
+        Left = 20
+        Top = 235
+        Width = 97
+        Height = 24
         Caption = 'Data Atual'
         FocusControl = edtUnitario
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object Label2: TLabel
         Left = 23
-        Top = 383
-        Width = 90
-        Height = 26
+        Top = 305
+        Width = 75
+        Height = 24
         Caption = 'Hor'#225'rio '
         FocusControl = edtUnitario
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -24
+        Font.Height = -21
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object EdtTotalVenda: TDBEdit
-        Left = 20
+        Left = 23
         Top = 58
         Width = 186
         Height = 21
@@ -478,7 +490,7 @@ object frmVendas: TfrmVendas
       end
       object EdtValorRecebido: TDBEdit
         Left = 23
-        Top = 153
+        Top = 128
         Width = 186
         Height = 21
         DataField = 'VALOR_RECEBIDO'
@@ -487,7 +499,7 @@ object frmVendas: TfrmVendas
       end
       object EdtTroco: TDBEdit
         Left = 23
-        Top = 245
+        Top = 195
         Width = 186
         Height = 21
         DataField = 'TROCO'
@@ -496,7 +508,7 @@ object frmVendas: TfrmVendas
       end
       object EdtData: TDBEdit
         Left = 23
-        Top = 335
+        Top = 273
         Width = 186
         Height = 21
         DataField = 'DATA_VENDA'
@@ -505,7 +517,7 @@ object frmVendas: TfrmVendas
       end
       object EdtHora: TDBEdit
         Left = 23
-        Top = 430
+        Top = 346
         Width = 186
         Height = 21
         DataField = 'HORA'

@@ -146,6 +146,10 @@
             <Form>FrmIdTabelas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Movimentacoes\NovaQtde.pas">
+            <Form>FrmQuantidade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -15,7 +15,8 @@ uses
   CuponFiscal in 'Movimentacoes\CuponFiscal.pas' {frmCupomFiscal},
   SaidaEstoque in 'Estoque\SaidaEstoque.pas' {frmSaiEstoque},
   EntradaEstoque in 'Estoque\EntradaEstoque.pas' {frmEntradaEstoque},
-  ControleId in 'Movimentacoes\ControleId.pas' {FrmIdTabelas};
+  ControleId in 'Movimentacoes\ControleId.pas' {FrmIdTabelas},
+  NovaQtde in 'Movimentacoes\NovaQtde.pas' {FrmQuantidade};
 
 {$R *.res}
 
