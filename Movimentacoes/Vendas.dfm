@@ -3,8 +3,8 @@ object frmVendas: TfrmVendas
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Vendas'
-  ClientHeight = 615
-  ClientWidth = 1370
+  ClientHeight = 685
+  ClientWidth = 1446
   Color = clMedGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -36,22 +36,26 @@ object frmVendas: TfrmVendas
   object painelTopo: TPanel
     Left = 0
     Top = 0
-    Width = 1370
+    Width = 1446
     Height = 61
     Align = alTop
     Color = clSilver
     ParentBackground = False
     TabOrder = 0
+    ExplicitLeft = 1
+    ExplicitTop = -5
   end
   object PainelTotal: TPanel
-    Left = 736
+    Left = 812
     Top = 61
     Width = 634
-    Height = 554
+    Height = 624
     Align = alRight
     Color = clSilver
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 817
+    ExplicitTop = 57
     object Label8: TLabel
       Left = 24
       Top = 133
@@ -106,8 +110,8 @@ object frmVendas: TfrmVendas
       ParentFont = False
     end
     object ImgProduto: TImage
-      Left = 129
-      Top = 257
+      Left = 139
+      Top = 270
       Width = 209
       Height = 188
       Stretch = True
@@ -172,13 +176,14 @@ object frmVendas: TfrmVendas
     end
     object Panel1: TPanel
       Left = 1
-      Top = 487
+      Top = 557
       Width = 632
       Height = 66
       Align = alBottom
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
+      ExplicitTop = 487
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -210,9 +215,10 @@ object frmVendas: TfrmVendas
       Left = 361
       Top = 67
       Width = 272
-      Height = 420
+      Height = 490
       Align = alRight
       TabOrder = 6
+      ExplicitTop = 73
       object Label4: TLabel
         Left = 23
         Top = 26
@@ -271,7 +277,7 @@ object frmVendas: TfrmVendas
       end
       object Label2: TLabel
         Left = 23
-        Top = 393
+        Top = 383
         Width = 90
         Height = 26
         Caption = 'Hor'#225'rio '
@@ -333,17 +339,19 @@ object frmVendas: TfrmVendas
   object painelGrid: TPanel
     Left = 0
     Top = 61
-    Width = 736
-    Height = 554
+    Width = 812
+    Height = 624
     Align = alClient
     Alignment = taLeftJustify
     Color = clActiveBorder
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 736
+    ExplicitHeight = 554
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 734
+      Width = 810
       Height = 66
       Align = alTop
       Caption = 'Itens adicionados'
@@ -356,12 +364,13 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 734
     end
     object DBItensVendidos: TDBGrid
       Left = 205
       Top = 67
-      Width = 530
-      Height = 420
+      Width = 606
+      Height = 490
       Align = alClient
       DataSource = DSQueryDetVendas
       TabOrder = 1
@@ -397,13 +406,15 @@ object frmVendas: TfrmVendas
     end
     object PanelTotal: TPanel
       Left = 1
-      Top = 487
-      Width = 734
+      Top = 557
+      Width = 810
       Height = 66
       Align = alBottom
       Color = clTeal
       ParentBackground = False
       TabOrder = 2
+      ExplicitTop = 487
+      ExplicitWidth = 734
       object Label5: TLabel
         Left = 11
         Top = 20
@@ -435,9 +446,10 @@ object frmVendas: TfrmVendas
       Left = 1
       Top = 67
       Width = 204
-      Height = 420
+      Height = 490
       Align = alLeft
       TabOrder = 3
+      ExplicitHeight = 420
       object Label10: TLabel
         Left = 8
         Top = 145
@@ -517,38 +529,34 @@ object frmVendas: TfrmVendas
   object srcVendas: TDataSource
     AutoEdit = False
     DataSet = DM.dataSetVendas
-    Left = 1440
-    Top = 10
+    OnStateChange = srcVendasStateChange
+    Left = 1355
+    Top = 5
   end
   object SrcQueryVendas: TDataSource
     AutoEdit = False
-    Left = 1114
-    Top = 12
+    Left = 1079
+    Top = 7
   end
   object DSConsultaProdutos: TDataSource
     DataSet = DM.consultaProdutos
-    Left = 1014
-    Top = 12
+    Left = 974
+    Top = 7
   end
   object DSConsultaFuncionarios: TDataSource
     DataSet = DM.consultaFunc
-    Left = 898
-    Top = 12
+    Left = 858
+    Top = 2
   end
   object DSDetalheVenda: TDataSource
     DataSet = DM.DataSetDetVenda
-    Left = 1205
-    Top = 11
+    Left = 1175
+    Top = 6
   end
   object DSQueryDetVendas: TDataSource
     DataSet = DM.QueryDetVenda
-    Left = 1304
-    Top = 10
-  end
-  object DSVendas: TDataSource
-    DataSet = DM.dataSetVendas
-    Left = 1383
-    Top = 10
+    Left = 1274
+    Top = 5
   end
   object Timer1: TTimer
     Left = 1453
@@ -564,5 +572,10 @@ object frmVendas: TfrmVendas
         OnClick = ConfigurarBanco1Click
       end
     end
+  end
+  object DataSource1: TDataSource
+    OnUpdateData = ConfigurarBanco1Click
+    Left = 680
+    Top = 10
   end
 end

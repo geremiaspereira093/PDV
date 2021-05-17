@@ -35,7 +35,6 @@ type
 		DSDetalheVenda: TDataSource;
 		Label11: TLabel;
 		DSQueryDetVendas: TDataSource;
-		DSVendas: TDataSource;
 		EdtQuantidade: TDBEdit;
 		EdtProduto: TDBEdit;
     ImgProduto: TImage;
@@ -70,6 +69,7 @@ type
     MainMenu1: TMainMenu;
     Utilitrios1: TMenuItem;
     ConfigurarBanco1: TMenuItem;
+    DataSource1: TDataSource;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure IniciarNFE;
@@ -88,6 +88,8 @@ type
     procedure IniciarVenda;
     procedure ConfigurarBanco1Click(Sender: TObject);
     procedure ConsultaProdutos;
+    procedure srcVendasStateChange(Sender: TObject);
+    procedure CarregarFoto;
 
 	private
 		{ Private declarations }
@@ -106,6 +108,14 @@ implementation
 {$R *.dfm}
 
 uses ModuloDados, ControleId;
+
+procedure TfrmVendas.CarregarFoto;
+var
+	CaminhoImagem:String;
+begin
+  CaminhoImagem :=  ExtractFileDir(GetCurrentDir) + '\PDV\Fontes\FotosPadrao\sem-foto.jpg';
+  ImgProduto.Picture.LoadFromFile(CaminhoImagem);
+end;
 
 procedure TfrmVendas.AbateEstoque;
 var
@@ -134,6 +144,13 @@ begin
 
 	AbateEstoque;
 	LimparProdutos;
+end;
+
+procedure TfrmVendas.srcVendasStateChange(Sender: TObject);
+begin
+	txtBusca.Enabled := ( DM.dataSetVendas.State in [dsInsert] );
+	if DM.dataSetVendas.State in [dsBrowse] Then
+  	txtBusca.Enabled := False;
 end;
 
 procedure TfrmVendas.CalcularSubTotal;
@@ -200,7 +217,6 @@ begin
 
   if not DM.ConsultaProdutos.IsEmpty Then
     begin
-      DM.DataSetDetVenda.Append;
       SalvaDetalheVenda;
     end;
 
@@ -214,7 +230,8 @@ begin
 	DM.dataSetVendas.Active := True;
 	DM.DataSetDetVenda.Active := True;
 	DM.QueryDetVenda.Active := True;
-	 LimpaCampos;
+  CarregarFoto;
+  LimpaCampos;
 end;
 
 procedure TfrmVendas.FormKeyDown(Sender: TObject; var Key: Word;
@@ -259,6 +276,7 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
+  DM.DataSetDetVenda.Append;
 end;
 
 procedure TfrmVendas.LimpaCampos;

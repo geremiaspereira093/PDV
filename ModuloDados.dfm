@@ -295,7 +295,7 @@ object DM: TDM
         'SELECT CODIGO,  NOME, VALOR, DESCRICAO, DATA_FABRICACAO, DATA_VA' +
         'LIDADE,QUANTIDADE, COD_FORN,  '
       'CODIGO_BARRAS, IMAGEM FROM PRODUTOS'
-      '')
+      'WHERE CODIGO = NULL')
     Left = 300
     Top = 270
     object consultaProdutosCODIGO: TAutoIncField
