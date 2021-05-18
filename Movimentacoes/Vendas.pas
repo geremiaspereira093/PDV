@@ -82,7 +82,6 @@ type
 		procedure AlimentarVendas;
 		procedure CalcularSubTotal;
 		procedure LimparProdutos;
-		//function Totalizar(Quantidade, ValorUnitario: Currency): Currency;
     procedure LimpaCampos;
     procedure ExibeFoto(Campo:TField;ImgProd:TImage);
     procedure IniciarVenda;
@@ -168,15 +167,6 @@ begin
 	LblTotal.Caption := FormatFloat('###.00,', SubTotal);
 end;
 
-//function TfrmVendas.Totalizar(Quantidade, ValorUnitario: Currency): Currency;
-//var
-//	Total: Currency;
-//begin
-//	Total := ValorUnitario * Quantidade;
-//	Result := Total;
-//end;
-
-
 procedure TfrmVendas.txtBuscaChange(Sender: TObject);
 begin
 	if txtBusca.Text <> '' then
@@ -203,7 +193,6 @@ begin
 	/// lancar movimentacao
 	/// CuponFiscal
   LimpaCampos;
-  ListarItens;
 end;
 
 procedure TfrmVendas.ConsultaProdutos;
@@ -261,8 +250,9 @@ begin
   //cancelar a venda atual
 	else if Key = VK_F4 Then
 	begin
-		/// cancelar Venda
+  	DM.dataSetVendas.Cancel;
 	end
+  //Trocar a quantidade
   else if Key = VK_F5 Then
   begin
     FrmQuantidade := TFrmQuantidade.Create(nil);
@@ -297,7 +287,6 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
-
 end;
 
 procedure TfrmVendas.LimpaCampos;
@@ -306,13 +295,18 @@ begin
   EdtValorRecebido.Text := '';
   EdtData.Text := '';
   EdtHora.Text := '';
+  EdtTroco.Text := '';
+  LblTroco.Caption := '0';
+  CarregarFoto;
 end;
 
 procedure TfrmVendas.LimparProdutos;
 begin
    txtBusca.Text := '';
    txtBusca.SetFocus;
+   EdtProduto.Text := '';
    edtQuantidade.Text := '1';
+
 end;
 
 procedure TfrmVendas.ListarItens;
@@ -351,7 +345,7 @@ begin
 
   //pegar o ids dos itens
   Tabela := 'DETALHE_VENDA';
-  Codigo :=0;
+  Codigo := 0;
   Codigo := Codigo + Codigo +1;
 
 	// Atualiza o Id da Tabela ControlaID
@@ -373,8 +367,7 @@ begin
 
   //atribuição dos Ids
   DM.DataSetDetVenda.FieldByName('CODIGO').Value := Id;
-  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Id;
-
+  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := DM.DataSetDetVenda.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;

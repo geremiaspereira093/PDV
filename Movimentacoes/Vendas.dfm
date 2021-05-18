@@ -151,6 +151,7 @@ object frmVendas: TfrmVendas
       Height = 485
       Align = alLeft
       TabOrder = 3
+      ExplicitTop = 73
       object Label10: TLabel
         Left = 8
         Top = 145
@@ -207,7 +208,7 @@ object frmVendas: TfrmVendas
     object Panel4: TPanel
       Left = 1
       Top = 67
-      Width = 210
+      Width = 204
       Height = 41
       Color = clTeal
       ParentBackground = False
@@ -397,9 +398,10 @@ object frmVendas: TfrmVendas
       Height = 485
       Align = alRight
       TabOrder = 6
+      ExplicitTop = 61
       object Label4: TLabel
         Left = 20
-        Top = 26
+        Top = 96
         Width = 98
         Height = 24
         Caption = 'Valor Total'
@@ -413,7 +415,7 @@ object frmVendas: TfrmVendas
       end
       object Label6: TLabel
         Left = 20
-        Top = 96
+        Top = 26
         Width = 136
         Height = 24
         Caption = 'Valor Recebido'
@@ -455,7 +457,7 @@ object frmVendas: TfrmVendas
       end
       object Label2: TLabel
         Left = 23
-        Top = 305
+        Top = 313
         Width = 75
         Height = 24
         Caption = 'Hor'#225'rio '
@@ -469,7 +471,7 @@ object frmVendas: TfrmVendas
       end
       object EdtTotalVenda: TDBEdit
         Left = 23
-        Top = 58
+        Top = 128
         Width = 186
         Height = 21
         DataField = 'VALOR_TOTAL'
@@ -478,7 +480,7 @@ object frmVendas: TfrmVendas
       end
       object EdtValorRecebido: TDBEdit
         Left = 23
-        Top = 128
+        Top = 58
         Width = 186
         Height = 21
         DataField = 'VALOR_RECEBIDO'
