@@ -334,6 +334,7 @@ var
 	Qtde: TSingentonQuantidade;
   Tabela:String;
   Codigo : Integer;
+  Id: Integer;
 begin
 	Quantidade := 1.00;
 	ValorUnitario := StrToCurr(edtUnitario.Text);
@@ -353,6 +354,7 @@ begin
   Codigo :=0;
   Codigo := Codigo + Codigo +1;
 
+	// Atualiza o Id da Tabela ControlaID
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;
   DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
@@ -360,9 +362,18 @@ begin
   DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
   DM.QueryId.ExecSQL;
 
-  DM.DataSetDetVenda.FieldByName('CODIGO').Value := Codigo;
+  DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.Open;
 
-  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Codigo;
+	if not DM.QueryId.IsEmpty Then
+  	Id := DM.QueryId.FieldByName('ID').AsInteger;
+
+  //atribuição dos Ids
+  DM.DataSetDetVenda.FieldByName('CODIGO').Value := Id;
+  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Id;
 
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
@@ -396,12 +407,12 @@ begin
 //  FAZER UM SELECT PARA PEGAR O CODIGO
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('SELECT ID FROM CONTROLA_ID WHERE TABELA = :TABELA');
+  DM.QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
   DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
   DM.QueryId.Open;
 
 	if not DM.QueryId.IsEmpty Then
-  	Id := DM.QueryIdID;
+  	Id := DM.QueryId.FieldByName('ID').AsInteger;
 
  	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Id;
   EdtTotalVenda.Text := CurrToStr(ValorTotal);

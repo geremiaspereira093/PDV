@@ -53,7 +53,6 @@ object frmVendas: TfrmVendas
     Color = clActiveBorder
     ParentBackground = False
     TabOrder = 1
-    ExplicitHeight = 624
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -70,8 +69,6 @@ object frmVendas: TfrmVendas
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = -3
-      ExplicitTop = 6
     end
     object DBItensVendidos: TDBGrid
       Left = 205
@@ -120,7 +117,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 2
-      ExplicitTop = 557
       object Label5: TLabel
         Left = 11
         Top = 20
@@ -155,7 +151,6 @@ object frmVendas: TfrmVendas
       Height = 485
       Align = alLeft
       TabOrder = 3
-      ExplicitHeight = 490
       object Label10: TLabel
         Left = 8
         Top = 145
@@ -241,9 +236,6 @@ object frmVendas: TfrmVendas
     Color = clSilver
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 804
-    ExplicitTop = 67
-    ExplicitHeight = 624
     object Label8: TLabel
       Left = 24
       Top = 163
@@ -371,8 +363,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
-      ExplicitLeft = 5
-      ExplicitTop = 557
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -407,8 +397,6 @@ object frmVendas: TfrmVendas
       Height = 485
       Align = alRight
       TabOrder = 6
-      ExplicitTop = 61
-      ExplicitHeight = 490
       object Label4: TLabel
         Left = 20
         Top = 26
