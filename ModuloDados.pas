@@ -629,11 +629,7 @@ end;
 procedure TDM.dataSetVendasBeforeCancel(DataSet: TDataSet);
 begin
 	if MessageDlg('Deseja cancelar à venda', mtConfirmation,[mbYes,mbNo],0) = mrNo Then
-  	ShowMessage('Venda não cancelada !')
-  else
-  begin
-   //	frmVendas.Retorna_Estoque;
-  end;
+  	abort
 end;
 
 procedure TDM.dataSetVendasBeforePost(DataSet: TDataSet);

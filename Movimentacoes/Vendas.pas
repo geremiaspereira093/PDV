@@ -37,8 +37,6 @@ type
     Label10: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    Panel4: TPanel;
-    Label15: TLabel;
     Timer1: TTimer;
     Label17: TLabel;
     MainMenu1: TMainMenu;
@@ -70,6 +68,7 @@ type
     EdtTroco: TDBEdit;
     EdtData: TDBEdit;
     EdtHora: TDBEdit;
+    Label15: TLabel;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure IniciarNFE;
@@ -107,7 +106,7 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados, ControleId, NovaQtde;
+uses ModuloDados, ControleId, NovaQtde, Cancelamento;
 
 procedure TfrmVendas.CarregarFoto;
 var
@@ -250,7 +249,7 @@ begin
   //cancelar a venda atual
 	else if Key = VK_F4 Then
 	begin
-  	DM.dataSetVendas.Cancel;
+		DM.dataSetVendas.Cancel;
 	end
   //Trocar a quantidade
   else if Key = VK_F5 Then
@@ -262,7 +261,10 @@ begin
       FrmQuantidade.Free;
     end;
   end
-
+  else if Key = VK_F11 Then
+  begin
+  	PanelMenu.Visible := True;
+  end
    //Finalizar a venda atual
 	else if Key = VK_F3 Then
 	begin
@@ -345,9 +347,7 @@ begin
 
   //pegar o ids dos itens
   Tabela := 'DETALHE_VENDA';
-  Codigo := 0;
-  Codigo := Codigo + Codigo +1;
-
+  Codigo := 1;
 	// Atualiza o Id da Tabela ControlaID
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;
@@ -367,7 +367,8 @@ begin
 
   //atribuição dos Ids
   DM.DataSetDetVenda.FieldByName('CODIGO').Value := Id;
-  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := DM.DataSetDetVenda.FieldByName('CODIGO').Value;
+  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Id;
+
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;
@@ -383,9 +384,8 @@ var
   Codigo :Integer;
   Id: Integer;
 begin
-	Codigo := 0;
 	Tabela := 'VENDA';
-  Codigo := Codigo + Codigo +1;
+  Codigo := 1;
 
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;

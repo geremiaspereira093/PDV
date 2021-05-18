@@ -150,6 +150,11 @@
             <Form>FrmQuantidade</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Vcl.Consts.pas"/>
+        <DCCReference Include="Movimentacoes\Cancelamento.pas">
+            <Form>FrmCancelar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

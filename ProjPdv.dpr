@@ -16,7 +16,9 @@ uses
   SaidaEstoque in 'Estoque\SaidaEstoque.pas' {frmSaiEstoque},
   EntradaEstoque in 'Estoque\EntradaEstoque.pas' {frmEntradaEstoque},
   ControleId in 'Movimentacoes\ControleId.pas' {FrmIdTabelas},
-  NovaQtde in 'Movimentacoes\NovaQtde.pas' {FrmQuantidade};
+  NovaQtde in 'Movimentacoes\NovaQtde.pas' {FrmQuantidade},
+  Vcl.Consts in 'Vcl.Consts.pas',
+  Cancelamento in 'Movimentacoes\Cancelamento.pas' {FrmCancelar};
 
 {$R *.res}
 

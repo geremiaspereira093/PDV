@@ -593,8 +593,8 @@ object DM: TDM
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 120
-    Top = 473
+    Left = 165
+    Top = 458
     Version = '19.03'
     mmColumnWidth = 0
     DataPipelineName = 'PipelineRelatorioVendas'
@@ -1084,7 +1084,7 @@ object DM: TDM
   object PipelineRelatorioVendas: TppDBPipeline
     DataSource = DataSourceRelatorioVendas
     UserName = 'PipelineRelatorioVendas'
-    Left = 30
+    Left = 50
     Top = 455
     object PipelineRelatorioVendasppField1: TppField
       FieldAlias = 'NOME'
@@ -1409,8 +1409,8 @@ object DM: TDM
     end
   end
   object DSQueryDetVendas: TDataSource
-    Left = 192
-    Top = 448
+    Left = 287
+    Top = 403
   end
   object QueryVenda: TADOQuery
     Connection = conexaoBanco
