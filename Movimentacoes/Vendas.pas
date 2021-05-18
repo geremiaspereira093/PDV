@@ -249,7 +249,8 @@ begin
   //cancelar a venda atual
 	else if Key = VK_F4 Then
 	begin
-		DM.dataSetVendas.Cancel;
+  	FrmCancelar := TFrmCancelar.Create(nil);
+    FrmCancelar.Show;
 	end
   //Trocar a quantidade
   else if Key = VK_F5 Then
