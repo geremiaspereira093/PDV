@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 571
-  Width = 493
+  Height = 537
+  Width = 480
   object dataSetForn: TADODataSet
     AutoCalcFields = False
     Connection = conexaoBanco
@@ -394,9 +394,7 @@ object DM: TDM
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     AfterInsert = dataSetVendasAfterInsert
-    BeforePost = dataSetVendasBeforePost
     AfterPost = dataSetVendasAfterPost
-    BeforeCancel = dataSetVendasBeforeCancel
     AfterCancel = dataSetVendasAfterCancel
     CommandText = 
       'SELECT CODIGO,COD_FUNCIONARIO,DATA_VENDA,VALOR_TOTAL, HORA,'#13#10'FUN' +
@@ -1330,9 +1328,11 @@ object DM: TDM
     Top = 15
   end
   object DataSetDetVenda: TADODataSet
+    AutoCalcFields = False
     Connection = conexaoBanco
     CursorType = ctStatic
     LockType = ltBatchOptimistic
+    AfterInsert = DataSetDetVendaAfterInsert
     CommandText = 
       'SELECT CODIGO,COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VAL' +
       'OR_TOTAL'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
@@ -1460,10 +1460,18 @@ object DM: TDM
   end
   object DataSetId: TADODataSet
     Connection = conexaoBanco
+    CursorType = ctStatic
     CommandText = 'SELECT ID, TABELA FROM CONTROLA_ID'
     Parameters = <>
     Left = 410
     Top = 340
+    object DataSetIdID: TIntegerField
+      FieldName = 'ID'
+    end
+    object DataSetIdTABELA: TStringField
+      FieldName = 'TABELA'
+      Size = 60
+    end
   end
   object QueryId: TADOQuery
     Connection = conexaoBanco

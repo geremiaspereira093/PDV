@@ -169,6 +169,8 @@ type
     QueryIdTABELA: TStringField;
     dataSetVendasCODIGO: TAutoIncField;
     DataSetDetVendaCODIGO: TAutoIncField;
+    DataSetIdID: TIntegerField;
+    DataSetIdTABELA: TStringField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);
@@ -205,12 +207,10 @@ type
     procedure dataSetCargosBeforeCancel(DataSet: TDataSet);
     procedure dataSetVendasAfterCancel(DataSet: TDataSet);
     procedure dataSetVendasAfterPost(DataSet: TDataSet);
-    procedure dataSetVendasBeforeCancel(DataSet: TDataSet);
     procedure dataSetVendasAfterInsert(DataSet: TDataSet);
     procedure consultaProdutosAfterDelete(DataSet: TDataSet);
     procedure consultaProdutosBeforeDelete(DataSet: TDataSet);
     procedure AdoQueryVendasCalcFields(DataSet: TDataSet);
-    procedure dataSetVendasBeforePost(DataSet: TDataSet);
     procedure consultaProdutosAfterCancel(DataSet: TDataSet);
     procedure DataSetCadastroFornAfterCancel(DataSet: TDataSet);
     procedure DataSetCadastroFornAfterPost(DataSet: TDataSet);
@@ -236,6 +236,7 @@ type
     procedure DataSetCadastroFornecedorAfterCancel(DataSet: TDataSet);
     procedure DataSetCadastroFornecedorAfterPost(DataSet: TDataSet);
     procedure DataSetCadastroFornecedorBeforeCancel(DataSet: TDataSet);
+    procedure DataSetDetVendaAfterInsert(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -397,6 +398,20 @@ procedure TDM.dataSetCargosBeforeCancel(DataSet: TDataSet);
 begin
 	if MessageDlg('Deseja cancelar a operação',mtConfirmation,[mbYes,mbNo],0) = mrNo Then
   	abort
+end;
+
+procedure TDM.DataSetDetVendaAfterInsert(DataSet: TDataSet);
+var
+	Tabela:String;
+begin
+	Tabela := 'VENDA';
+	DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.Open;
+
+	DataSetDetVenda.FieldByName('COD_VENDA').Value :=  DM.QueryId.FieldByName('ID').AsInteger;
 end;
 
 procedure TDM.DataSetEditCargosAfterCancel(DataSet: TDataSet);
@@ -624,17 +639,6 @@ begin
   //frmVendas.LimpaCampos;
   //fazer teste homologado
 	//frmVendas.IniciarNFE;
-end;
-
-procedure TDM.dataSetVendasBeforeCancel(DataSet: TDataSet);
-begin
-	if MessageDlg('Deseja cancelar à venda', mtConfirmation,[mbYes,mbNo],0) = mrNo Then
-  	abort
-end;
-
-procedure TDM.dataSetVendasBeforePost(DataSet: TDataSet);
-begin
- //	AdoQueryVendas.AutoCalcFields := True;
 end;
 
 end.

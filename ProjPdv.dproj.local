@@ -93,7 +93,7 @@
     <Transaction>2021/05/17 16:50:42.000.524,=C:\Users\Programacao04\Desktop\PDV\Unit1.pas</Transaction>
     <Transaction>2021/05/17 16:51:58.000.463,C:\Users\Programacao04\Desktop\PDV\Unit1.dfm=C:\Users\Programacao04\Desktop\PDV\Movimentacoes\NovaQtde.dfm</Transaction>
     <Transaction>2021/05/17 16:51:58.000.463,C:\Users\Programacao04\Desktop\PDV\Unit1.pas=C:\Users\Programacao04\Desktop\PDV\Movimentacoes\NovaQtde.pas</Transaction>
-    <Transaction>2021/05/18 15:50:08.110,=C:\Users\Programacao04\Desktop\PDV\Vcl.Consts.pas</Transaction>
+    <Transaction>2021/05/18 15:50:08.000.110,=C:\Users\Programacao04\Desktop\PDV\Vcl.Consts.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="Cadastros"/>

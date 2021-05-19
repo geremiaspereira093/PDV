@@ -42,7 +42,6 @@ object frmVendas: TfrmVendas
     Color = clSilver
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -1
   end
   object painelGrid: TPanel
     Left = 0
@@ -166,12 +165,11 @@ object frmVendas: TfrmVendas
       Align = alLeft
       TabOrder = 3
       Visible = False
-      ExplicitTop = 73
       object Label10: TLabel
         Left = 8
         Top = 87
         Width = 172
-        Height = 29
+        Height = 22
         Caption = 'Finalizar Venda  [F3]'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -210,7 +208,7 @@ object frmVendas: TfrmVendas
         Left = 4
         Top = 215
         Width = 144
-        Height = 20
+        Height = 22
         Caption = ' Quantidade  [F5]'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText

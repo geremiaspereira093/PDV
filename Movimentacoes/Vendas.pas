@@ -89,6 +89,7 @@ type
     procedure srcVendasStateChange(Sender: TObject);
     procedure CarregarFoto;
     procedure DarTroco;
+    procedure LimpaGrid;
 
 	private
 		{ Private declarations }
@@ -290,6 +291,7 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
+  LimpaGrid;
 end;
 
 procedure TfrmVendas.LimpaCampos;
@@ -301,6 +303,22 @@ begin
   EdtTroco.Text := '';
   LblTroco.Caption := '0';
   CarregarFoto;
+  LimpaGrid;
+end;
+
+procedure TfrmVendas.LimpaGrid;
+begin
+	DM.QueryDetVenda.Close;
+	DM.QueryDetVenda.SQL.Clear;
+	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA');
+  DM.QueryDetVenda.SQL.Add('WHERE COD_VENDA = NULL');
+	DM.QueryDetVenda.Open;
+
+	DBItensVendidos.Columns[0].Alignment := taCenter;
+	DBItensVendidos.Columns[2].Alignment := taCenter;
+	DBItensVendidos.Columns[3].Alignment := taCenter;
+
+  CalcularSubTotal;
 end;
 
 procedure TfrmVendas.LimparProdutos;
@@ -368,8 +386,6 @@ begin
 
   //atribuição dos Ids
   DM.DataSetDetVenda.FieldByName('CODIGO').Value := Id;
-  DM.DataSetDetVenda.FieldByName('COD_VENDA').Value := Id;
-
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;
