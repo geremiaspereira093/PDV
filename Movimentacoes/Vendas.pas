@@ -347,9 +347,6 @@ var
 	Produto: String;
 	ValorTotal: Currency;
 	Qtde: TSingentonQuantidade;
-  Tabela:String;
-  Codigo : Integer;
-  Id: Integer;
 begin
 	Quantidade := 1.00;
 	ValorUnitario := StrToCurr(edtUnitario.Text);
@@ -364,28 +361,6 @@ begin
 	Produto := DM.ConsultaProdutos.FieldByName('NOME').Value;
 	EdtProduto.Text := Produto;
 
-  //pegar o ids dos itens
-  Tabela := 'DETALHE_VENDA';
-  Codigo := 1;
-	// Atualiza o Id da Tabela ControlaID
-	DM.QueryId.Close;
-  DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
-  DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
-  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
-  DM.QueryId.ExecSQL;
-
-  DM.QueryId.Close;
-  DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
-  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
-  DM.QueryId.Open;
-
-	if not DM.QueryId.IsEmpty Then
-  	Id := DM.QueryId.FieldByName('ID').AsInteger;
-
-  //atribuição dos Ids
-  DM.DataSetDetVenda.FieldByName('CODIGO').Value := Id;
 	DM.DataSetDetVenda.FieldByName('COD_PRODUTO').Value :=
   DM.ConsultaProdutos.FieldByName('CODIGO').Value;
 	DM.DataSetDetVenda.FieldByName('PRODUTO').Value := Produto;
@@ -397,34 +372,12 @@ procedure TfrmVendas.AlimentarVendas;
 var
 	ValorTotal: Currency;
 	Qtde: TSingentonQuantidade;
-  Tabela : String;
-  Codigo :Integer;
-  Id: Integer;
+
 begin
-	Tabela := 'VENDA';
-  Codigo := 1;
-
-	DM.QueryId.Close;
-  DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
-  DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
-  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
-  DM.QueryId.ExecSQL;
-
 	Qtde:= TSingentonQuantidade.GetInstance;
 	ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
 
-//  FAZER UM SELECT PARA PEGAR O CODIGO
-	DM.QueryId.Close;
-  DM.QueryId.SQL.Clear;
-  DM.QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
-  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
-  DM.QueryId.Open;
-
-	if not DM.QueryId.IsEmpty Then
-  	Id := DM.QueryId.FieldByName('ID').AsInteger;
-
- 	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Id;
+// 	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Id;
   EdtTotalVenda.Text := CurrToStr(ValorTotal);
 	EdtData.Text := DateToStr(Now);
 	EdtHora.Text := TimeToStr(Now);

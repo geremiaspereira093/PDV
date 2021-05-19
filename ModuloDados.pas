@@ -403,7 +403,27 @@ end;
 procedure TDM.DataSetDetVendaAfterInsert(DataSet: TDataSet);
 var
 	Tabela:String;
+  Codigo:Integer;
 begin
+	//pegar o ids dos itens
+  Tabela := 'DETALHE_VENDA';
+  Codigo := 1;
+	// Atualiza o Id da Tabela ControlaID
+	DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.ExecSQL;
+
+  DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.Open;
+
+	DM.DataSetDetVenda.FieldByName('CODIGO').Value := DM.QueryId.FieldByName('ID').AsInteger;
+
 	Tabela := 'VENDA';
 	DM.QueryId.Close;
   DM.QueryId.SQL.Clear;
@@ -629,8 +649,27 @@ begin
 end;
 
 procedure TDM.dataSetVendasAfterInsert(DataSet: TDataSet);
+var
+	Tabela:String;
+  Codigo:Integer;
 begin
-//	ShowMessage('Venda inicializada !');
+	Tabela := 'VENDA';
+  Codigo := 1;
+
+	DM.QueryId.Close;
+  DM.QueryId.SQL.Clear;
+  DM.QueryId.SQL.Add('UPDATE CONTROLA_ID SET ID = ID + :CODIGO WHERE TABELA = :TABELA');
+  DM.QueryId.Parameters.ParamByName('CODIGO').Value := Codigo;
+  DM.QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  DM.QueryId.ExecSQL;
+
+	QueryId.Close;
+  QueryId.SQL.Clear;
+  QueryId.SQL.Add('SELECT ID,TABELA FROM CONTROLA_ID WHERE TABELA = :TABELA');
+  QueryId.Parameters.ParamByName('TABELA').Value := Tabela;
+  QueryId.Open;
+
+	dataSetVendas.FieldByName('CODIGO').Value :=  DM.QueryId.FieldByName('ID').AsInteger;
 end;
 
 procedure TDM.dataSetVendasAfterPost(DataSet: TDataSet);
