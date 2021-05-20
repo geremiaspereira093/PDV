@@ -1,0 +1,50 @@
+unit CancelarItem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.ComCtrls;
+
+type
+  TFrmCancelaItem = class(TForm)
+    RichEditCancel: TRichEdit;
+    BtnSim: TPanel;
+    BtnNao: TPanel;
+    procedure FormCreate(Sender: TObject);
+    procedure BtnNaoClick(Sender: TObject);
+    procedure BtnSimClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCancelaItem: TFrmCancelaItem;
+
+implementation
+
+{$R *.dfm}
+
+uses ModuloDados;
+
+procedure TFrmCancelaItem.BtnNaoClick(Sender: TObject);
+begin
+	Close;
+end;
+
+procedure TFrmCancelaItem.BtnSimClick(Sender: TObject);
+begin
+	//Devolver ao Estoque
+	DM.DataSetDetVenda.FieldByName('ESTADO').Value := 'C';
+
+end;
+
+procedure TFrmCancelaItem.FormCreate(Sender: TObject);
+begin
+	RichEditCancel.Text := 'Deseja Cancelar o Item ?';
+end;
+
+end.

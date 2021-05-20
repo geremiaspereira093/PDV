@@ -1,0 +1,62 @@
+unit Cancelamento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
+  Data.DB, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TFrmCancelar = class(TForm)
+    BtnSim: TPanel;
+    BtnNao: TPanel;
+    RichEditCancel: TRichEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure BtnNaoClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure BtnSimClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCancelar: TFrmCancelar;
+
+implementation
+
+{$R *.dfm}
+
+uses ModuloDados;
+
+procedure TFrmCancelar.BtnNaoClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TFrmCancelar.BtnSimClick(Sender: TObject);
+begin
+	DM.dataSetVendas.Cancel;
+  DM.DataSetDetVenda.Close;
+  DM.DataSetDetVenda.Open;
+  Close;
+end;
+
+procedure TFrmCancelar.FormCreate(Sender: TObject);
+begin
+ RichEditCancel.Text := 'Deseja Cancelar a Venda ?';
+end;
+
+procedure TFrmCancelar.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+	if Key = VK_ESCAPE Then
+  	BtnNaoClick(Sender)
+  else if Key = VK_RETURN Then
+  	BtnSimClick(Sender);
+end;
+
+end.

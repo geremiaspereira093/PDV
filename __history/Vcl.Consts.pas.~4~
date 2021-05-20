@@ -1,0 +1,6 @@
+ção';
+  SMsgDlgError = 'Erro';
+  SMsgDlgInformation = 'Informação';
+  SMsgDlgConfirm = 'Confirmar';
+  SMsgDlgYes = '&Sim';
+  SMsgDlgNo = '&Nã

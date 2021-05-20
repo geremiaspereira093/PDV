@@ -1,0 +1,55 @@
+unit CancelarItem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.ComCtrls, Data.DB, Vcl.DBCtrls;
+
+type
+  TFrmCancelaItem = class(TForm)
+    BtnSim: TPanel;
+    BtnNao: TPanel;
+    DBRichEdit1: TDBRichEdit;
+    DsQueryDetVenda: TDataSource;
+    procedure FormCreate(Sender: TObject);
+    procedure BtnNaoClick(Sender: TObject);
+    procedure BtnSimClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCancelaItem: TFrmCancelaItem;
+
+implementation
+
+{$R *.dfm}
+
+uses ModuloDados;
+
+procedure TFrmCancelaItem.BtnNaoClick(Sender: TObject);
+begin
+	Close;
+end;
+
+procedure TFrmCancelaItem.BtnSimClick(Sender: TObject);
+var
+	Estado:String;
+begin
+	DM.QueryDetVenda.Close;
+	DM.QueryDetVenda.SQL.Clear;
+	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.Open;
+  // mudar a cor
+  //Devolver ao Estoque
+end;
+procedure TFrmCancelaItem.FormCreate(Sender: TObject);
+begin
+//	RichEditCancel.Text := 'Deseja Cancelar o Item ?';
+end;
+
+end.
