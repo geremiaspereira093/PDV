@@ -108,7 +108,7 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados, ControleId, NovaQtde, Cancelamento, CancelarItem;
+uses ModuloDados, ControleId, NovaQtde, Cancelamento, CancelaItem;
 
 procedure TfrmVendas.CarregarFoto;
 var

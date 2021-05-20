@@ -155,9 +155,8 @@
             <Form>FrmCancelarVenda</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Movimentacoes\CancelarItem.pas">
+        <DCCReference Include="Movimentacoes\CancelaItem.pas">
             <Form>FrmCancelaItem</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
