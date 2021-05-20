@@ -152,7 +152,11 @@
         </DCCReference>
         <DCCReference Include="Vcl.Consts.pas"/>
         <DCCReference Include="Movimentacoes\Cancelamento.pas">
-            <Form>FrmCancelar</Form>
+            <Form>FrmCancelarVenda</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\CancelarItem.pas">
+            <Form>FrmCancelaItem</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

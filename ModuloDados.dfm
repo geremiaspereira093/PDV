@@ -1335,10 +1335,10 @@ object DM: TDM
     AfterInsert = DataSetDetVendaAfterInsert
     CommandText = 
       'SELECT CODIGO,COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VAL' +
-      'OR_TOTAL'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
+      'OR_TOTAL, ESTADO'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
     Parameters = <>
-    Left = 413
-    Top = 157
+    Left = 408
+    Top = 162
     object DataSetDetVendaCODIGO: TAutoIncField
       FieldName = 'CODIGO'
     end
@@ -1370,6 +1370,12 @@ object DM: TDM
       FieldName = 'VALOR_TOTAL'
       DisplayFormat = '###.00,'
       Precision = 19
+    end
+    object DataSetDetVendaESTADO: TStringField
+      DisplayLabel = 'Estado'
+      FieldName = 'ESTADO'
+      FixedChar = True
+      Size = 1
     end
   end
   object QueryDetVenda: TADOQuery
@@ -1479,8 +1485,8 @@ object DM: TDM
     Parameters = <>
     SQL.Strings = (
       'SELECT ID, TABELA FROM CONTROLA_ID')
-    Left = 415
-    Top = 405
+    Left = 410
+    Top = 400
     object QueryIdID: TIntegerField
       DisplayLabel = 'C'#243'digo'
       FieldName = 'ID'

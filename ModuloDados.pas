@@ -171,6 +171,7 @@ type
     DataSetDetVendaCODIGO: TAutoIncField;
     DataSetIdID: TIntegerField;
     DataSetIdTABELA: TStringField;
+    DataSetDetVendaESTADO: TStringField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

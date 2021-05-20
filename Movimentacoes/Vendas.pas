@@ -69,6 +69,7 @@ type
     EdtData: TDBEdit;
     EdtHora: TDBEdit;
     Label15: TLabel;
+    Label16: TLabel;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure IniciarNFE;
@@ -107,7 +108,7 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados, ControleId, NovaQtde, Cancelamento;
+uses ModuloDados, ControleId, NovaQtde, Cancelamento, CancelarItem;
 
 procedure TfrmVendas.CarregarFoto;
 var
@@ -250,8 +251,8 @@ begin
   //cancelar a venda atual
 	else if Key = VK_F4 Then
 	begin
-  	FrmCancelar := TFrmCancelar.Create(nil);
-    FrmCancelar.Show;
+  	FrmCancelarVenda := TFrmCancelarVenda.Create(nil);
+    FrmCancelarVenda.Show;
 	end
   //Trocar a quantidade
   else if Key = VK_F5 Then
@@ -271,10 +272,13 @@ begin
 	else if Key = VK_F3 Then
 	begin
 		if MessageDlg('Deseja Finalizar a Venda ?', mtInformation, [mbYes, mbNo], 0) = mrYes Then
-		begin
 			ConfirmarVenda;
-		end;
-	end;
+	end
+  else if Key = VK_DELETE Then
+  begin
+  	FrmCancelaItem := TFrmCancelaItem.Create(nil);
+    FrmCancelaItem.Show;
+  end;
 
 end;
 

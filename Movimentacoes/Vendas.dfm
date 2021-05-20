@@ -167,13 +167,13 @@ object frmVendas: TfrmVendas
       Visible = False
       object Label10: TLabel
         Left = 8
-        Top = 87
-        Width = 172
-        Height = 22
+        Top = 96
+        Width = 138
+        Height = 19
         Caption = 'Finalizar Venda  [F3]'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
@@ -181,25 +181,25 @@ object frmVendas: TfrmVendas
       object Label13: TLabel
         Left = 8
         Top = 156
-        Width = 174
-        Height = 22
+        Width = 141
+        Height = 19
         Caption = 'Cancelar Venda  [F4]'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object Label14: TLabel
         Left = 11
-        Top = 28
-        Width = 148
-        Height = 22
+        Top = 26
+        Width = 120
+        Height = 19
         Caption = 'Iniciar Venda [F2]'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
@@ -207,12 +207,25 @@ object frmVendas: TfrmVendas
       object Label17: TLabel
         Left = 4
         Top = 215
-        Width = 144
-        Height = 22
+        Width = 116
+        Height = 19
         Caption = ' Quantidade  [F5]'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -16
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label16: TLabel
+        Left = 11
+        Top = 279
+        Width = 171
+        Height = 19
+        Caption = 'Cancelar Item [DELETE]'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
         Font.Name = 'Times New Roman'
         Font.Style = [fsBold]
         ParentFont = False
