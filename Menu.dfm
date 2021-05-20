@@ -238,6 +238,8 @@ object frmMenu: TfrmMenu
     Color = clSilver
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = -8
+    ExplicitTop = 486
     object Label1: TLabel
       Left = 13
       Top = 2
