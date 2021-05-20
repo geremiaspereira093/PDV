@@ -1334,12 +1334,12 @@ object DM: TDM
     LockType = ltBatchOptimistic
     AfterInsert = DataSetDetVendaAfterInsert
     CommandText = 
-      'SELECT CODIGO,COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VAL' +
-      'OR_TOTAL, ESTADO'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
+      'SELECT CODIGO, COD_VENDA,PRODUTO,VALOR,QUANTIDADE,COD_PRODUTO,VA' +
+      'LOR_TOTAL, ESTADO'#13#10'FROM DETALHE_VENDA WHERE CODIGO = NULL'
     Parameters = <>
     Left = 408
     Top = 162
-    object DataSetDetVendaCODIGO: TAutoIncField
+    object DataSetDetVendaCODIGO: TIntegerField
       FieldName = 'CODIGO'
     end
     object DataSetDetVendaCOD_VENDA: TIntegerField
@@ -1383,32 +1383,39 @@ object DM: TDM
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'SELECT PRODUTO,QUANTIDADE,'
+      'SELECT CODIGO, PRODUTO,QUANTIDADE,'
       'VALOR,VALOR_TOTAL'
       ' FROM DETALHE_VENDA'
-      'WHERE CODIGO = NULL'
+      ''
       '')
     Left = 413
-    Top = 216
+    Top = 226
+    object QueryDetVendaCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+    end
     object QueryDetVendaPRODUTO: TStringField
       DisplayLabel = 'Produto'
+      DisplayWidth = 11
       FieldName = 'PRODUTO'
       Size = 80
     end
     object QueryDetVendaVALOR: TBCDField
       DisplayLabel = 'Valor'
+      DisplayWidth = 14
       FieldName = 'VALOR'
       DisplayFormat = '###.00,'
       Precision = 19
     end
     object QueryDetVendaQUANTIDADE: TBCDField
       DisplayLabel = 'Quantidade'
+      DisplayWidth = 15
       FieldName = 'QUANTIDADE'
       DisplayFormat = '###.00,'
       Precision = 19
     end
     object QueryDetVendaVALOR_TOTAL: TBCDField
       DisplayLabel = 'Total'
+      DisplayWidth = 20
       FieldName = 'VALOR_TOTAL'
       DisplayFormat = '###.00,'
       Precision = 19
@@ -1425,8 +1432,8 @@ object DM: TDM
     SQL.Strings = (
       'SELECT CODIGO,COD_FUNCIONARIO,DATA_VENDA,VALOR_TOTAL,HORA,'
       'FUNCIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO  FROM VENDAS')
-    Left = 413
-    Top = 272
+    Left = 403
+    Top = 287
     object QueryVendaCODIGO: TAutoIncField
       FieldName = 'CODIGO'
       ReadOnly = True

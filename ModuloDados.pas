@@ -168,10 +168,11 @@ type
     QueryIdID: TIntegerField;
     QueryIdTABELA: TStringField;
     dataSetVendasCODIGO: TAutoIncField;
-    DataSetDetVendaCODIGO: TAutoIncField;
     DataSetIdID: TIntegerField;
     DataSetIdTABELA: TStringField;
     DataSetDetVendaESTADO: TStringField;
+    DataSetDetVendaCODIGO: TIntegerField;
+    QueryDetVendaCODIGO: TIntegerField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

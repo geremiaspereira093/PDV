@@ -70,6 +70,7 @@ type
     EdtHora: TDBEdit;
     Label15: TLabel;
     Label16: TLabel;
+    MediaPlayer1: TMediaPlayer;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure IniciarNFE;
@@ -140,6 +141,9 @@ procedure TfrmVendas.SalvaDetalheVenda;
 begin
 	AlimentarDetalheVenda;
 	DM.DataSetDetVenda.Post;
+  MediaPlayer1.FileName := ExtractFileDir(GetCurrentDir) + '\PDV\Fontes\Blip\barCode.wav';
+  MediaPlayer1.Open;
+  MediaPlayer1.Play;
 	ListarItens;
 	CalcularSubTotal;
 	AbateEstoque;
@@ -190,7 +194,6 @@ begin
 	DM.dataSetVendas.Post;
   DM.dataSetVendas.UpdateBatch();
   DM.DataSetDetVenda.UpdateBatch();
-
 	/// lancar movimentacao
 	/// CuponFiscal
   LimpaCampos;
@@ -314,7 +317,7 @@ procedure TfrmVendas.LimpaGrid;
 begin
 	DM.QueryDetVenda.Close;
 	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA');
+	DM.QueryDetVenda.SQL.Add('SELECT CODIGO, COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA');
   DM.QueryDetVenda.SQL.Add('WHERE COD_VENDA = NULL');
 	DM.QueryDetVenda.Open;
 
@@ -338,7 +341,7 @@ procedure TfrmVendas.ListarItens;
 begin
 	DM.QueryDetVenda.Close;
 	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add('SELECT COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.SQL.Add('SELECT CODIGO, COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
 	DM.QueryDetVenda.Open;
 
 	DBItensVendidos.Columns[0].Alignment := taCenter;

@@ -18,8 +18,9 @@ uses
   ControleId in 'Movimentacoes\ControleId.pas' {FrmIdTabelas},
   NovaQtde in 'Movimentacoes\NovaQtde.pas' {FrmQuantidade},
   Vcl.Consts in 'Vcl.Consts.pas',
-	Cancelamento in 'Movimentacoes\Cancelamento.pas' {FrmCancelarVenda},
-  CancelaItem in 'Movimentacoes\CancelaItem.pas' {FrmCancelaItem};
+  Cancelamento in 'Movimentacoes\Cancelamento.pas' {FrmCancelarVenda},
+  CancelaItem in 'Movimentacoes\CancelaItem.pas' {FrmCancelaItem},
+  ItemCancelado in 'Movimentacoes\ItemCancelado.pas' {FrmConfirmaCancelamento};
 
 {$R *.res}
 

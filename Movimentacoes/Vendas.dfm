@@ -111,13 +111,17 @@ object frmVendas: TfrmVendas
         item
           Expanded = False
           FieldName = 'VALOR'
-          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'VALOR_TOTAL'
           Width = 187
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CODIGO'
           Visible = True
         end>
     end
@@ -368,6 +372,8 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
+      ExplicitLeft = 5
+      ExplicitTop = 558
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -517,6 +523,16 @@ object frmVendas: TfrmVendas
         DataSource = srcVendas
         TabOrder = 4
       end
+    end
+    object MediaPlayer1: TMediaPlayer
+      Left = 180
+      Top = 566
+      Width = 253
+      Height = 30
+      DoubleBuffered = True
+      Visible = False
+      ParentDoubleBuffered = False
+      TabOrder = 7
     end
   end
   object srcVendas: TDataSource
