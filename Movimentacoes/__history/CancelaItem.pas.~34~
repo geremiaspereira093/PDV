@@ -1,0 +1,86 @@
+unit CancelaItem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFrmCancelaItem = class(TForm)
+    RichEditCancel: TRichEdit;
+    BtnSim: TPanel;
+    BtnNao: TPanel;
+    procedure BtnNaoClick(Sender: TObject);
+    procedure BtnSimClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure ConsultaItem;
+    procedure AtualizaStatus;
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCancelaItem: TFrmCancelaItem;
+
+implementation
+
+{$R *.dfm}
+
+uses ModuloDados;
+
+procedure TFrmCancelaItem.AtualizaStatus;
+var
+	Status:Char;
+  Codigo:Integer;
+begin
+	DM.QueryDetVenda.Close;
+	DM.QueryDetVenda.SQL.Clear;
+	DM.QueryDetVenda.SQL.Add('SELECT CODIGO, COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL,ESTADO FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.Open;
+
+  GridCancel.Columns[0].Alignment := taCenter;
+	GridCancel.Columns[2].Alignment := taCenter;
+	GridCancel.Columns[3].Alignment := taCenter;
+
+  if not DM.QueryDetVenda.IsEmpty Then
+  begin
+    RichEditCancel.Visible := False;
+		GridCancel.Visible := True;
+    Codigo := DM.QueryDetVenda.FieldByName('CODIGO').AsInteger;
+  end
+  else
+  begin
+    RichEditCancel.Visible := True;
+		GridCancel.Visible := False;
+  end;
+
+	Status:= 'S';
+ 	DM.QueryDetVenda.Close;
+	DM.QueryDetVenda.SQL.Clear;
+	DM.QueryDetVenda.SQL.Add('UPDATE DETALHE_VENDA SET ESTADO = :STATUS WHERE CODIGO = :ID');
+  DM.QueryDetVenda.Parameters.ParamByName('STATUS').Value := Status;
+  DM.QueryDetVenda.Parameters.ParamByName('ID').Value := Codigo;
+	DM.QueryDetVenda.ExecSQL;
+
+end;
+
+procedure TFrmCancelaItem.BtnNaoClick(Sender: TObject);
+begin
+	Close;
+end;
+
+procedure TFrmCancelaItem.BtnSimClick(Sender: TObject);
+begin
+	ConsultaItem;
+  AtualizaStatus;
+end;
+
+procedure TFrmCancelaItem.ConsultaItem;
+begin
+
+end;
+
+end.

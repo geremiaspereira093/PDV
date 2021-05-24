@@ -1,0 +1,64 @@
+object ConfirmaCancelamento: TConfirmaCancelamento
+  Left = 0
+  Top = 0
+  Caption = 'ConfirmaCancelamento'
+  ClientHeight = 242
+  ClientWidth = 527
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GridCancel: TDBGrid
+    Left = 8
+    Top = 8
+    Width = 468
+    Height = 153
+    DataSource = DsQueryDetVenda
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Visible = False
+  end
+  object BtnSim: TPanel
+    Left = 298
+    Top = 177
+    Width = 91
+    Height = 25
+    Caption = 'Sim [ENTER]'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Times New Roman'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = BtnSimClick
+  end
+  object BtnNao: TPanel
+    Left = 395
+    Top = 179
+    Width = 86
+    Height = 25
+    Caption = 'N'#227'o [ESC]'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Times New Roman'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object DsQueryDetVenda: TDataSource
+    DataSet = DM.QueryDetVenda
+    Left = 80
+    Top = 170
+  end
+end
