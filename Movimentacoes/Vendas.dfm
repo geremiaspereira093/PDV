@@ -118,11 +118,6 @@ object frmVendas: TfrmVendas
           FieldName = 'VALOR_TOTAL'
           Width = 187
           Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CODIGO'
-          Visible = True
         end>
     end
     object PanelTotal: TPanel
@@ -324,7 +319,7 @@ object frmVendas: TfrmVendas
     end
     object txtBusca: TEdit
       Left = 24
-      Top = 125
+      Top = 123
       Width = 186
       Height = 21
       TabOrder = 1
@@ -372,8 +367,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
-      ExplicitLeft = 5
-      ExplicitTop = 558
       object Label9: TLabel
         Left = 5
         Top = 20

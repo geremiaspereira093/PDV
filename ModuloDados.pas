@@ -173,6 +173,7 @@ type
     DataSetDetVendaESTADO: TStringField;
     DataSetDetVendaCODIGO: TIntegerField;
     QueryDetVendaCODIGO: TIntegerField;
+    QueryDetVendaCOD_PRODUTO: TIntegerField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

@@ -1384,8 +1384,7 @@ object DM: TDM
     Parameters = <>
     SQL.Strings = (
       'SELECT CODIGO, PRODUTO,QUANTIDADE,'
-      'VALOR,VALOR_TOTAL'
-      ' FROM DETALHE_VENDA'
+      'VALOR,VALOR_TOTAL,COD_PRODUTO  FROM DETALHE_VENDA'
       ''
       '')
     Left = 413
@@ -1420,6 +1419,9 @@ object DM: TDM
       DisplayFormat = '###.00,'
       Precision = 19
     end
+    object QueryDetVendaCOD_PRODUTO: TIntegerField
+      FieldName = 'COD_PRODUTO'
+    end
   end
   object DSQueryDetVendas: TDataSource
     Left = 287
@@ -1432,7 +1434,7 @@ object DM: TDM
     SQL.Strings = (
       'SELECT CODIGO,COD_FUNCIONARIO,DATA_VENDA,VALOR_TOTAL,HORA,'
       'FUNCIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO  FROM VENDAS')
-    Left = 403
+    Left = 408
     Top = 287
     object QueryVendaCODIGO: TAutoIncField
       FieldName = 'CODIGO'

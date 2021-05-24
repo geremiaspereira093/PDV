@@ -18,7 +18,7 @@ object FrmConfirmaCancelamento: TFrmConfirmaCancelamento
   PixelsPerInch = 96
   TextHeight = 13
   object GridCancel: TDBGrid
-    Left = 17
+    Left = 19
     Top = 18
     Width = 468
     Height = 153

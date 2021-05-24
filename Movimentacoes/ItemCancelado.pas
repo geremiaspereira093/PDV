@@ -21,6 +21,7 @@ type
     { Private declarations }
 
     procedure AtualizaStatus;
+    procedure DevolveEStoque;
   public
     { Public declarations }
   end;
@@ -43,7 +44,8 @@ var
 begin
 	DM.QueryDetVenda.Close;
 	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add('SELECT CODIGO, COD_VENDA,PRODUTO,QUANTIDADE,VALOR,VALOR_TOTAL,ESTADO FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.SQL.Add('SELECT CODIGO, COD_VENDA,PRODUTO,QUANTIDADE,COD_PRODUTO,VALOR,'+
+ 	 'VALOR_TOTAL,ESTADO FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
 	DM.QueryDetVenda.Open;
 
   GridCancel.Columns[0].Alignment := taCenter;
@@ -62,6 +64,7 @@ begin
 //  DM.QueryDetVenda.Parameters.ParamByName('STATUS').Value := Status;
 //  DM.QueryDetVenda.Parameters.ParamByName('ID').Value := Codigo;
 //	DM.QueryDetVenda.ExecSQL;
+	DevolveEStoque;
 	DM.QueryDetVenda.Delete;
 end;
 
@@ -73,6 +76,22 @@ end;
 procedure TFrmConfirmaCancelamento.BtnSimClick(Sender: TObject);
 begin
 	AtualizaStatus;
+end;
+
+procedure TFrmConfirmaCancelamento.DevolveEStoque;
+var
+	Id:Integer;
+  QtdeVenda:Currency;
+begin
+	Id := DM.QueryDetVenda.FieldByName('COD_PRODUTO').AsInteger;
+  QtdeVenda := DM.QueryDetVenda.FieldByName('QUANTIDADE').AsCurrency;
+	DM.consultaProdutos.Close;
+  DM.consultaProdutos.SQL.Clear;
+  DM.consultaProdutos.SQL.Add('UPDATE PRODUTOS SET QUANTIDADE = QUANTIDADE + :QTDEVENDA ');
+  DM.consultaProdutos.SQL.Add('WHERE CODIGO = :ID');
+  DM.consultaProdutos.Parameters.ParamByName('QTDEVENDA').Value := QtdeVenda;
+  DM.consultaProdutos.Parameters.ParamByName('ID').Value := Id;
+  DM.consultaProdutos.ExecSQL;
 end;
 
 procedure TFrmConfirmaCancelamento.FormKeyDown(Sender: TObject;
