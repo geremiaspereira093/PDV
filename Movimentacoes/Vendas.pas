@@ -71,9 +71,9 @@ type
     Label15: TLabel;
     Label16: TLabel;
     MediaPlayer1: TMediaPlayer;
+    NFCe: TACBrNFe;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
-		procedure IniciarNFE;
 		procedure txtBuscaChange(Sender: TObject);
 		procedure AlimentarDetalheVenda;
 		procedure ListarItens;
@@ -92,6 +92,7 @@ type
     procedure CarregarFoto;
     procedure DarTroco;
     procedure LimpaGrid;
+    procedure IniciaNfce;
 
 	private
 		{ Private declarations }
@@ -196,6 +197,7 @@ begin
   DM.DataSetDetVenda.UpdateBatch();
 	/// lancar movimentacao
 	/// CuponFiscal
+  IniciaNfce;
   LimpaCampos;
 end;
 
@@ -285,14 +287,14 @@ begin
 
 end;
 
-procedure TfrmVendas.IniciarNFE;
+/// emissao de cupon
+procedure TfrmVendas.IniciaNfce;
 var
-	Caminho: String;
+	Caminho:String;
 begin
-	Caminho := ExtractFilePath(Application.ExeName) + 'nfe';
+	Caminho := ExtractFileName(Application.ExeName)+'\PDV\Fontes\nfe\';
 	ShowMessage(Caminho);
-	/// pegando o caminho da pasta nfce com os exemplos
-	// Nfce.Configuracoes.Arquivos.PathSchemas := Caminho;
+  NFCe.Configuracoes.Arquivos.PathSchemas := Caminho;
 end;
 
 procedure TfrmVendas.IniciarVenda;

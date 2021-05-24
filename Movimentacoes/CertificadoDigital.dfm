@@ -4,16 +4,16 @@ object frmCertificados: TfrmCertificados
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Cerfificados Digitais'
-  ClientHeight = 272
-  ClientWidth = 544
-  Color = clMedGray
+  ClientHeight = 260
+  ClientWidth = 528
+  Color = clTeal
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object StringGrid1: TStringGrid

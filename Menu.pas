@@ -41,10 +41,10 @@ type
     procedure Vendas1Click(Sender: TObject);
     procedure Usurios1Click(Sender: TObject);
     procedure Entradadeestoque1Click(Sender: TObject);
-//    procedure CertificadosDigitais1Click(Sender: TObject);
     procedure SadadeEstoque1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PegaUsuario;
+    procedure CertificadosDigitais1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,65 +69,11 @@ begin
   frmCargos.Show;
 end;
 
-//procedure TfrmMenu.CertificadosDigitais1Click(Sender: TObject);
-//var
-//	I: Integer;
-//  AddLinha: Boolean;
-//  Serie: String;
-//  CertificadoDigital: String;
-//begin
-// 	frmCertificados := TfrmCertificados.Create(nil);
-//  try
-//  	frmVendas.Nfce.SSL.LerCertificadosStore;
-//    AddLinha := True;
-//    frmCertificados.StringGrid1.ColWidths[0] := 220;
-//    frmCertificados.StringGrid1.ColWidths[0] := 250;
-//    frmCertificados.StringGrid1.ColWidths[0] := 120;
-//    frmCertificados.StringGrid1.ColWidths[0] := 80;
-//    frmCertificados.StringGrid1.ColWidths[0] := 150;
-//
-//		frmCertificados.StringGrid1.Cells[0,0] := 'Número de Série';
-//    frmCertificados.StringGrid1.Cells[1,0] := 'Razão Social';
-//    frmCertificados.StringGrid1.Cells[2,0] := 'CNPJ';
-//    frmCertificados.StringGrid1.Cells[3,0] := 'Validade';
-//    frmCertificados.StringGrid1.Cells[4,0] := 'Certificadora';
-//
-//    for I := 0 to  frmVendas.Nfce.SSL.ListaCertificados.Count -1 do
-//    begin
-//    	with frmVendas.Nfce.SSL.ListaCertificados[I] do
-//      begin
-//        Serie := NumeroSerie;
-//        with frmCertificados.StringGrid1 do
-//        begin
-//          if AddLinha = True Then
-//          begin
-//            RowCount := RowCount +1;
-//            Cells[0,RowCount -1] := NumeroSerie;
-//            Cells[1,RowCount -1] := RazaoSocial;
-//            Cells[2,RowCount -1] := CNPJ;
-//            Cells[3,RowCount -1] := FormatDateBR(DataVenc);
-//            Cells[4,RowCount -1] := Certificadora;
-//            AddLinha := True;
-//          end;
-//        end;
-//      end;
-//    end;
-//
-//    frmCertificados.ShowModal;
-//
-//		if frmCertificados.ModalResult = mrOk  Then
-//  		CertificadoDigital := frmCertificados.StringGrid1.Cells[0,frmCertificados.StringGrid1.Row];
-//
-//  	frmVendas.Nfce.Configuracoes.Certificados.NumeroSerie := CertificadoDigital;
-//    frmVendas.Nfce.WebServices.StatusServico.Executar;
-//    ShowMessage(CertificadoDigital);
-//    ShowMessage(frmVendas.Nfce.WebServices.StatusServico.Msg);
-//
-//  finally
-//    frmCertificados.Free;
-//  end;
-
-//end;
+procedure TfrmMenu.CertificadosDigitais1Click(Sender: TObject);
+begin
+  frmCertificados := TfrmCertificados.Create(nil);
+  frmCertificados.Show;s
+end;
 
 procedure TfrmMenu.Entradadeestoque1Click(Sender: TObject);
 begin

@@ -4164,6 +4164,7 @@ object frmMenu: TfrmMenu
       end
       object CertificadosDigitais1: TMenuItem
         Caption = 'Certificados Digitais'
+        OnClick = CertificadosDigitais1Click
       end
       object Emitircupomfiscal1: TMenuItem
         Caption = 'Emitir cupom fiscal'
