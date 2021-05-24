@@ -34,7 +34,7 @@ object FrmConfirmaCancelamento: TFrmConfirmaCancelamento
   end
   object BtnSim: TPanel
     Left = 280
-    Top = 187
+    Top = 188
     Width = 91
     Height = 25
     Caption = 'Sim [ENTER]'
