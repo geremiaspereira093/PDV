@@ -72,7 +72,7 @@ end;
 procedure TfrmMenu.CertificadosDigitais1Click(Sender: TObject);
 begin
   frmCertificados := TfrmCertificados.Create(nil);
-  frmCertificados.Show;s
+  frmCertificados.Show;
 end;
 
 procedure TfrmMenu.Entradadeestoque1Click(Sender: TObject);

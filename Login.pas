@@ -95,9 +95,9 @@ begin
 
   if DM.consultaUsuarios.IsEmpty Then
   begin
-//    ShowMessage('Usuario ou senha inválidos !');
-//    limpaCampos;
-//    abort
+    MessageDlg('Usuario ou senha inválidos !',mtWarning,mbOKCancel,0);
+    limpaCampos;
+    abort
   end
   else
     frmLogin.Close;
