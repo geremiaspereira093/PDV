@@ -89,7 +89,7 @@ object frmVendas: TfrmVendas
       Width = 789
       Height = 485
       Align = alClient
-      DataSource = DSQueryDetVendas
+      DataSource = SrcQueryVendas
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -367,6 +367,8 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
+      ExplicitLeft = 5
+      ExplicitTop = 558
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -403,7 +405,7 @@ object frmVendas: TfrmVendas
       TabOrder = 6
       object Label4: TLabel
         Left = 20
-        Top = 96
+        Top = 98
         Width = 91
         Height = 22
         Caption = 'Valor Total'
@@ -431,7 +433,7 @@ object frmVendas: TfrmVendas
       end
       object Label7: TLabel
         Left = 20
-        Top = 163
+        Top = 235
         Width = 49
         Height = 22
         Caption = 'Troco'
@@ -445,7 +447,7 @@ object frmVendas: TfrmVendas
       end
       object Label3: TLabel
         Left = 20
-        Top = 235
+        Top = 310
         Width = 88
         Height = 22
         Caption = 'Data Atual'
@@ -459,11 +461,25 @@ object frmVendas: TfrmVendas
       end
       object Label2: TLabel
         Left = 23
-        Top = 313
+        Top = 388
         Width = 70
         Height = 22
         Caption = 'Hor'#225'rio '
         FocusControl = edtUnitario
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label18: TLabel
+        Left = 20
+        Top = 173
+        Width = 76
+        Height = 22
+        Caption = 'Desconto'
+        FocusControl = EdtDesconto
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -19
@@ -491,7 +507,7 @@ object frmVendas: TfrmVendas
       end
       object EdtTroco: TDBEdit
         Left = 23
-        Top = 195
+        Top = 273
         Width = 186
         Height = 21
         DataField = 'TROCO'
@@ -500,7 +516,7 @@ object frmVendas: TfrmVendas
       end
       object EdtData: TDBEdit
         Left = 23
-        Top = 273
+        Top = 348
         Width = 186
         Height = 21
         DataField = 'DATA_VENDA'
@@ -509,17 +525,26 @@ object frmVendas: TfrmVendas
       end
       object EdtHora: TDBEdit
         Left = 23
-        Top = 346
+        Top = 421
         Width = 186
         Height = 21
         DataField = 'HORA'
         DataSource = srcVendas
         TabOrder = 4
       end
+      object EdtDesconto: TDBEdit
+        Left = 23
+        Top = 203
+        Width = 186
+        Height = 21
+        DataField = 'DESCONTO'
+        DataSource = srcVendas
+        TabOrder = 5
+      end
     end
     object MediaPlayer1: TMediaPlayer
-      Left = 180
-      Top = 566
+      Left = 170
+      Top = 571
       Width = 253
       Height = 30
       DoubleBuffered = True
@@ -581,18 +606,18 @@ object frmVendas: TfrmVendas
     Top = 5
   end
   object NFCe: TACBrNFe
-    Configuracoes.Geral.SSLLib = libNone
-    Configuracoes.Geral.SSLCryptLib = cryNone
+    Configuracoes.Geral.SSLLib = libCustom
+    Configuracoes.Geral.SSLCryptLib = cryWinCrypt
     Configuracoes.Geral.SSLHttpLib = httpNone
     Configuracoes.Geral.SSLXmlSignLib = xsNone
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
     Configuracoes.Geral.ModeloDF = moNFCe
     Configuracoes.Arquivos.OrdenacaoPath = <>
     Configuracoes.WebServices.UF = 'SP'
-    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.AguardarConsultaRet = 3
     Configuracoes.WebServices.QuebradeLinha = '|'
     Configuracoes.RespTec.IdCSRT = 0
-    Left = 1290
-    Top = 521
+    Left = 910
+    Top = 626
   end
 end

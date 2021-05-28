@@ -3,9 +3,9 @@ object frmCertificados: TfrmCertificados
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Cerfificados Digitais'
-  ClientHeight = 260
-  ClientWidth = 528
+  Caption = 'Certificado Digital'
+  ClientHeight = 232
+  ClientWidth = 603
   Color = clTeal
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,24 +17,24 @@ object frmCertificados: TfrmCertificados
   PixelsPerInch = 96
   TextHeight = 13
   object StringGrid1: TStringGrid
-    Left = 25
-    Top = 25
-    Width = 481
+    Left = 0
+    Top = 0
+    Width = 601
     Height = 186
     TabOrder = 0
   end
-  object BitBtn1: TBitBtn
-    Left = 431
-    Top = 224
+  object BtnOk: TBitBtn
+    Left = 525
+    Top = 199
     Width = 75
     Height = 25
     Kind = bkOK
     NumGlyphs = 2
     TabOrder = 1
   end
-  object BitBtn2: TBitBtn
-    Left = 330
-    Top = 224
+  object BtnCancel: TBitBtn
+    Left = 431
+    Top = 199
     Width = 75
     Height = 25
     Kind = bkCancel

@@ -10,8 +10,8 @@ uses
 type
   TfrmCertificados = class(TForm)
     StringGrid1: TStringGrid;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    BtnOk: TBitBtn;
+    BtnCancel: TBitBtn;
   private
     { Private declarations }
   public

@@ -70,9 +70,80 @@ begin
 end;
 
 procedure TfrmMenu.CertificadosDigitais1Click(Sender: TObject);
+var
+	AddLinha: boolean;
+	I: integer;
+	Serie: string;
+	CertificadoDig: string;
+	CaminhoNFCE: string;
 begin
-  frmCertificados := TfrmCertificados.Create(nil);
-  frmCertificados.Show;
+    frmCertificados := TfrmCertificados.Create(nil);
+    try
+      CaminhoNFCE := ExtractFileDir(GetCurrentDir)+'\PDV\Fontes\nfe';
+      FrmVendas.nfce.Configuracoes.Arquivos.PathSchemas := caminhoNFCE;
+
+    FrmVendas.NFCe.SSL.LerCertificadosStore;
+
+
+    addLinha := true;
+
+    with frmCertificados.StringGrid1 do
+    begin
+       ColWidths[0] := 220;
+       ColWidths[1] := 250;
+       ColWidths[2] := 120;
+       ColWidths[3] := 80;
+       ColWidths[4] := 150;
+
+       Cells[0,0] := 'Num Série';
+       Cells[1,0] := 'Razão Social';
+       Cells[2,0] := 'CNPJ';
+       Cells[3,0] := 'Validade';
+       Cells[4,0] := 'Certificadora';
+
+    end;
+
+    for i := 0 to FrmVendas.nfce.SSL.ListaCertificados.Count -1 do
+    begin
+
+    with FrmVendas.nfce.SSL.ListaCertificados[i] do
+    begin
+      Serie := NumeroSerie;
+      //ShowMessage(Serie);
+
+    with frmCertificados.StringGrid1 do
+    begin
+      if addLinha then
+      begin
+       RowCount := RowCount + 1;
+       Cells[0, RowCount - 1] := NumeroSerie;
+       Cells[1, RowCount - 1] := RazaoSocial;
+       Cells[2, RowCount - 1] := CNPJ;
+       Cells[3, RowCount - 1] := FormatDateBr(DataVenc);
+       Cells[4, RowCount - 1] := Certificadora;
+       addLinha := true;
+
+      end;
+
+    end;
+
+    end;
+	end;
+    frmCertificados.ShowModal;
+    //////////////////////////
+    if frmCertificados.ModalResult = mrOk Then
+    begin
+			CertificadoDig := FrmCertificados.StringGrid1.Cells[0, FrmCertificados.StringGrid1.Row];
+    end;
+    FrmVendas.NFCe.Configuracoes.Certificados.NumeroSerie := CertificadoDig;
+    FrmVendas.nfce.WebServices.StatusServico.Executar;
+
+    ShowMessage(certificadoDig);
+  	ShowMessage(FrmVendas.nfce.WebServices.StatusServico.Msg);
+  finally
+    frmCertificados.Free;
+  end;
+
 end;
 
 procedure TfrmMenu.Entradadeestoque1Click(Sender: TObject);

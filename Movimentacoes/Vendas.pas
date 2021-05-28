@@ -7,7 +7,9 @@ uses
 	System.Classes, Vcl.Graphics,
 	Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
 	Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, ACBrBase,
-	ACBrDFe, ACBrNFe, DateUtils, Vcl.MPlayer,Vcl.Imaging.jpeg, Vcl.Menus;
+	ACBrDFe, ACBrNFe, DateUtils, Vcl.MPlayer,Vcl.Imaging.jpeg, Vcl.Menus,
+  ACBrUtil,ACBrNFeNotasFiscais,pcnConversao,pcnConversaoNFe,ACBrNFSe,
+  pcnNFe, pnfsConversao, System.Math;
 
 type
 	TSingentonQuantidade = class
@@ -72,6 +74,8 @@ type
     Label16: TLabel;
     MediaPlayer1: TMediaPlayer;
     NFCe: TACBrNFe;
+    Label18: TLabel;
+    EdtDesconto: TDBEdit;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure txtBuscaChange(Sender: TObject);
@@ -93,6 +97,7 @@ type
     procedure DarTroco;
     procedure LimpaGrid;
     procedure IniciaNfce;
+    procedure GeraNfce;
 
 	private
 		{ Private declarations }
@@ -197,7 +202,9 @@ begin
   DM.DataSetDetVenda.UpdateBatch();
 	/// lancar movimentacao
 	/// CuponFiscal
+
   IniciaNfce;
+	GeraNfce;
   LimpaCampos;
 end;
 
@@ -287,14 +294,208 @@ begin
 
 end;
 
+procedure TfrmVendas.GeraNfce;
+
+Var
+  NotaF: NotaFiscal;
+  Item : integer;
+  Produto: TDetCollectionItem;
+  InfoPgto: TpagCollectionItem;
+
+begin
+	nfce.NotasFiscais.Clear;
+	NotaF := nfce.NotasFiscais.Add;
+  //DADOS DA NOTA FISCAL
+
+  NotaF.NFe.Ide.natOp     := 'VENDA';
+  NotaF.NFe.Ide.indPag    := ipVista;
+  NotaF.NFe.Ide.modelo    := 65;
+  NotaF.NFe.Ide.serie     := 1;
+  NotaF.NFe.Ide.nNF       := DM.QueryVenda.FieldBYname('CODIGO').AsInteger;
+  NotaF.NFe.Ide.dEmi      := Date;
+  NotaF.NFe.Ide.dSaiEnt   := Date;
+  NotaF.NFe.Ide.hSaiEnt   := Now;
+  NotaF.NFe.Ide.tpNF      := tnSaida;
+  NotaF.NFe.Ide.tpEmis    := teNormal;
+  NotaF.NFe.Ide.tpAmb     := taHomologacao;  //Lembre-se de trocar esta variável quando for para ambiente de produção
+  NotaF.NFe.Ide.verProc   := '1.0.0.0'; //Versão do seu sistema
+  NotaF.NFe.Ide.cUF       := 31;
+  NotaF.NFe.Ide.cMunFG    := 0624123;
+  NotaF.NFe.Ide.finNFe    := fnNormal;
+
+
+  //DADOS DO EMITENTE
+
+  NotaF.NFe.Emit.CNPJCPF           := '18311776000198';
+  //inscrição estadual
+  NotaF.NFe.Emit.IE                := '';
+  NotaF.NFe.Emit.xNome             := 'Q-Cursos Networks';
+  NotaF.NFe.Emit.xFant             := 'Q-Cursos';
+
+  NotaF.NFe.Emit.EnderEmit.fone    := '(31)3333-3333';
+  NotaF.NFe.Emit.EnderEmit.CEP     := 30512660;
+  NotaF.NFe.Emit.EnderEmit.xLgr    := 'Rua A';
+  NotaF.NFe.Emit.EnderEmit.nro     := '325';
+  NotaF.NFe.Emit.EnderEmit.xCpl    := '';
+  NotaF.NFe.Emit.EnderEmit.xBairro := 'Santa Monica';
+  NotaF.NFe.Emit.EnderEmit.cMun    := 0624123;
+  NotaF.NFe.Emit.EnderEmit.xMun    := 'Belo Horizonte';
+  NotaF.NFe.Emit.EnderEmit.UF      := 'MG';
+  NotaF.NFe.Emit.enderEmit.cPais   := 1058;
+  NotaF.NFe.Emit.enderEmit.xPais   := 'BRASIL';
+
+  NotaF.NFe.Emit.IEST              := '';
+ // NotaF.NFe.Emit.IM                := '2648800'; // Preencher no caso de existir serviços na nota
+  //NotaF.NFe.Emit.CNAE              := '6201500'; // Verifique na cidade do emissor da NFe se é permitido
+                                // a inclusão de serviços na NFe
+  NotaF.NFe.Emit.CRT               := crtSimplesNacional;// (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
+
+
+
+  //DADOS DO DESTINATÁRIO
+
+  NotaF.NFe.Dest.CNPJCPF           := '05481336000137';
+  NotaF.NFe.Dest.IE                := '687138770110';
+  NotaF.NFe.Dest.ISUF              := '';
+  NotaF.NFe.Dest.xNome             := 'D.J. COM. E LOCAÇÃO DE SOFTWARES LTDA - ME';
+
+//
+//  NotaF.NFe.Dest.EnderDest.Fone    := '1532599600';
+//  NotaF.NFe.Dest.EnderDest.CEP     := 18270170;
+//  NotaF.NFe.Dest.EnderDest.xLgr    := 'Rua Coronel Aureliano de Camargo';
+//  NotaF.NFe.Dest.EnderDest.nro     := '973';
+//  NotaF.NFe.Dest.EnderDest.xCpl    := '';
+//  NotaF.NFe.Dest.EnderDest.xBairro := 'Centro';
+//  NotaF.NFe.Dest.EnderDest.cMun    := 3554003;
+//  NotaF.NFe.Dest.EnderDest.xMun    := 'Tatui';
+//  NotaF.NFe.Dest.EnderDest.UF      := 'SP';
+//  NotaF.NFe.Dest.EnderDest.cPais   := 1058;
+//  NotaF.NFe.Dest.EnderDest.xPais   := 'BRASIL';
+
+
+
+  //ITENS DA VENDA NA NOTA
+
+  //RELACIONANDO OS ITENS COM A  VENDA
+   item := 1;
+   DM.QueryDetVenda.Close;
+   DM.QueryDetVenda.SQL.Clear;
+   DM.QueryDetVenda.SQL.Add('select * from detalhes_vendas WHERE numero_venda = :num order by codigo asc') ;
+   DM.QueryDetVenda.Parameters.ParamByName('num').Value :=  DM.QueryVenda.FieldByName('CODIGO').Value;
+   DM.QueryDetVenda.Open;
+   DM.QueryDetVenda.First;
+
+   while not DM.QueryDetVenda.Eof do
+   begin
+     Produto := NotaF.NFe.Det.New;
+     Produto.Prod.nItem    := item; // Número sequencial, para cada item deve ser incrementado
+     Produto.Prod.cProd    := '123456';
+     Produto.Prod.cEAN     := '7896523206646';
+     Produto.Prod.xProd    := DM.QueryDetVenda.FieldByName('PRODUTO').Value;
+     Produto.Prod.NCM      := '94051010'; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
+     Produto.Prod.EXTIPI   := '';
+     Produto.Prod.CFOP     := '5101';
+     Produto.Prod.uCom     := 'UN';
+     Produto.Prod.qCom     := DM.QueryDetVenda.FieldByName('QUANTIDADE').Value;
+     Produto.Prod.vUnCom   := DM.QueryDetVenda.FieldByName('VALOR').Value;
+     Produto.Prod.vProd    := DM.QueryDetVenda.FieldByName('VALOR_TOTAL').Value;
+
+
+    //INFORMAÇÕES DE IMPOSTOS SOBRE OS PRODUTOS
+     Produto.Prod.cEANTrib  := '7896523206646';
+     Produto.Prod.uTrib     := 'UN';
+     Produto.Prod.qTrib     := 1;
+     Produto.Prod.vUnTrib   := 100;
+     Produto.Prod.vOutro    := 0;
+     Produto.Prod.vFrete    := 0;
+     Produto.Prod.vSeg      := 0;
+     Produto.Prod.vDesc     := 0;
+
+     Produto.Prod.CEST := '1111111';
+
+     Produto.infAdProd := 'Informacao Adicional do Produto';
+
+
+   // lei da transparencia nos impostos
+     Produto.Imposto.vTotTrib := 0;
+     Produto.Imposto.ICMS.CST          := cst00;
+     Produto.Imposto.ICMS.orig    := oeNacional;
+     Produto.Imposto.ICMS.modBC   := dbiValorOperacao;
+     Produto.Imposto.ICMS.vBC     := 100;
+     Produto.Imposto.ICMS.pICMS   := 18;
+     Produto.Imposto.ICMS.vICMS   := 18;
+     Produto.Imposto.ICMS.modBCST := dbisMargemValorAgregado;
+     Produto.Imposto.ICMS.pMVAST  := 0;
+     Produto.Imposto.ICMS.pRedBCST:= 0;
+     Produto.Imposto.ICMS.vBCST   := 0;
+     Produto.Imposto.ICMS.pICMSST := 0;
+     Produto.Imposto.ICMS.vICMSST := 0;
+     Produto.Imposto.ICMS.pRedBC  := 0;
+
+       // partilha do ICMS e fundo de probreza
+     Produto.Imposto.ICMSUFDest.vBCUFDest      := 0.00;
+     Produto.Imposto.ICMSUFDest.pFCPUFDest     := 0.00;
+     Produto.Imposto.ICMSUFDest.pICMSUFDest    := 0.00;
+     Produto.Imposto.ICMSUFDest.pICMSInter     := 0.00;
+     Produto.Imposto.ICMSUFDest.pICMSInterPart := 0.00;
+     Produto.Imposto.ICMSUFDest.vFCPUFDest     := 0.00;
+     Produto.Imposto.ICMSUFDest.vICMSUFDest    := 0.00;
+     Produto.Imposto.ICMSUFDest.vICMSUFRemet   := 0.00;
+
+     item := item + 1;
+   	 DM.QueryDetVenda.Next;
+   end;
+
+   //totalizando
+
+   NotaF.NFe.Total.ICMSTot.vBC     := 100;
+   NotaF.NFe.Total.ICMSTot.vICMS   := 18;
+   NotaF.NFe.Total.ICMSTot.vBCST   := 0;
+   NotaF.NFe.Total.ICMSTot.vST     := 0;
+   NotaF.NFe.Total.ICMSTot.vProd   := DM.QueryVenda.FieldByName('VALOR').Value;
+   NotaF.NFe.Total.ICMSTot.vFrete  := 0;
+   NotaF.NFe.Total.ICMSTot.vSeg    := 0;
+   NotaF.NFe.Total.ICMSTot.vDesc   := StrToCurr(EdtDesconto.Text);
+   NotaF.NFe.Total.ICMSTot.vII     := 0;
+   NotaF.NFe.Total.ICMSTot.vIPI    := 0;
+   NotaF.NFe.Total.ICMSTot.vPIS    := 0;
+   NotaF.NFe.Total.ICMSTot.vCOFINS := 0;
+   NotaF.NFe.Total.ICMSTot.vOutro  := 0;
+   NotaF.NFe.Total.ICMSTot.vNF     := 100;
+
+    // lei da transparencia de impostos
+   NotaF.NFe.Total.ICMSTot.vTotTrib := 0;
+
+  // partilha do icms e fundo de probreza
+  NotaF.NFe.Total.ICMSTot.vFCPUFDest   := 0.00;
+  NotaF.NFe.Total.ICMSTot.vICMSUFDest  := 0.00;
+  NotaF.NFe.Total.ICMSTot.vICMSUFRemet := 0.00;
+
+
+  NotaF.NFe.Transp.modFrete := mfSemFrete;  //SEM FRETE
+
+  // YA. Informações de pagamento
+
+  InfoPgto := NotaF.NFe.pag.New;
+  InfoPgto.indPag := ipVista;
+  InfoPgto.tPag   := fpDinheiro;
+  InfoPgto.vPag   := DM.QueryVenda.FieldByName('VALOR').Value;
+
+  nfce.NotasFiscais.Assinar;
+  nfce.Enviar(DM.QueryVenda.FieldByName('CODIGO').AsInteger);
+  ShowMessage(nfce.WebServices.StatusServico.Msg);
+
+end;
+
 /// emissao de cupon
 procedure TfrmVendas.IniciaNfce;
 var
 	Caminho:String;
 begin
-	Caminho := ExtractFileName(Application.ExeName)+'\PDV\Fontes\nfe\';
+	Caminho := ExtractFileDir(GetCurrentDir)+'\PDV\Fontes\nfe';
 	ShowMessage(Caminho);
   NFCe.Configuracoes.Arquivos.PathSchemas := Caminho;
+  ShowMessage(Caminho);
 end;
 
 procedure TfrmVendas.IniciarVenda;
