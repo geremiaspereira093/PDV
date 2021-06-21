@@ -63,19 +63,20 @@ type
     Label4: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label3: TLabel;
-    Label2: TLabel;
-    EdtTotalVenda: TDBEdit;
-    EdtValorRecebido: TDBEdit;
-    EdtTroco: TDBEdit;
-    EdtData: TDBEdit;
-    EdtHora: TDBEdit;
     Label15: TLabel;
     Label16: TLabel;
     MediaPlayer1: TMediaPlayer;
     NFCe: TACBrNFe;
     Label18: TLabel;
-    EdtDesconto: TDBEdit;
+    Label3: TLabel;
+    Panel4: TPanel;
+    Label22: TLabel;
+    EdtTotal: TDBEdit;
+    EditRecebido: TDBEdit;
+    EditTroco: TDBEdit;
+    EdtDataVenda: TDBEdit;
+    EditDesconto: TDBEdit;
+    EdtHora: TDBEdit;
 		procedure FormCreate(Sender: TObject);
 		procedure AbateEstoque;
 		procedure txtBuscaChange(Sender: TObject);
@@ -90,7 +91,6 @@ type
     procedure LimpaCampos;
     procedure ExibeFoto(Campo:TField;ImgProd:TImage);
     procedure IniciarVenda;
-    procedure ConfigurarBanco1Click(Sender: TObject);
     procedure ConsultaProdutos;
     procedure srcVendasStateChange(Sender: TObject);
     procedure CarregarFoto;
@@ -98,7 +98,8 @@ type
     procedure LimpaGrid;
     procedure IniciaNfce;
     procedure GeraNfce;
-
+    procedure ConfigurarBanco1Click(Sender: TObject);
+    procedure ValidaCampos;
 	private
 		{ Private declarations }
 		ValorUnitario: Currency;
@@ -115,13 +116,13 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados, ControleId, NovaQtde, Cancelamento, CancelaItem;
+uses ModuloDados, NovaQtde, Cancelamento, CancelaItem, Controle;
 
 procedure TfrmVendas.CarregarFoto;
 var
 	CaminhoImagem:String;
 begin
-  CaminhoImagem :=  ExtractFileDir(GetCurrentDir) + '\PDV\Fontes\FotosPadrao\sem-foto.jpg';
+  CaminhoImagem :=  ExtractFileDir(GetCurrentDir) +'\PDV\Fontes\FotosPadrao\sem-foto.jpg';
   ImgProduto.Picture.LoadFromFile(CaminhoImagem);
 end;
 
@@ -146,13 +147,14 @@ end;
 procedure TfrmVendas.SalvaDetalheVenda;
 begin
 	AlimentarDetalheVenda;
+  LimpaGrid;
 	DM.DataSetDetVenda.Post;
-  MediaPlayer1.FileName := ExtractFileDir(GetCurrentDir) + '\PDV\Fontes\Blip\barCode.wav';
+  MediaPlayer1.FileName := ExtractFileDir(GetCurrentDir) +'\PDV\Fontes\Blip\barCode.wav';
   MediaPlayer1.Open;
   MediaPlayer1.Play;
-	ListarItens;
 	CalcularSubTotal;
 	AbateEstoque;
+  ListarItens;
 	LimparProdutos;
 end;
 
@@ -184,10 +186,20 @@ begin
 		ConsultaProdutos;
 end;
 
+
+procedure TfrmVendas.ValidaCampos;
+begin
+	if Trim(EditRecebido.Text) =''Then
+  begin
+  	MessageDlg(' Campo  vazio',mtError,mbOKCancel,0);
+    abort
+  end;
+end;
+
 procedure TfrmVendas.ConfigurarBanco1Click(Sender: TObject);
 begin
-	FrmIdTabelas := TFrmIdTAbelas.Create(nil);
-  FrmIdTabelas.Show;
+	IdTabelas := TIdTabelas.Create(self);
+  IdTabelas.Show;
 end;
 
 procedure TfrmVendas.ConfirmarVenda;
@@ -197,15 +209,17 @@ var
 begin
 	AlimentarVendas;
   DarTroco;
+  ValidaCampos;
 	DM.dataSetVendas.Post;
   DM.dataSetVendas.UpdateBatch();
   DM.DataSetDetVenda.UpdateBatch();
 	/// lancar movimentacao
 	/// CuponFiscal
-
-  IniciaNfce;
-	GeraNfce;
+//  IniciaNfce;
+//	GeraNfce;
   LimpaCampos;
+	LimpaGrid;
+  CarregarFoto;
 end;
 
 procedure TfrmVendas.ConsultaProdutos;
@@ -223,6 +237,7 @@ begin
     begin
     	DM.DataSetDetVenda.Append;
       SalvaDetalheVenda;
+      DM.ConsultaProdutos.Close;
     end;
 
 end;
@@ -233,10 +248,10 @@ var
   ValorRecebido: Currency;
   Troco:Currency;
 begin
-   ValorRecebido := StrToCurr(EdtValorRecebido.Text);
-   ValorTotal := StrToCurr(EdtTotalVenda.Text);
+   ValorRecebido := StrToCurr(EditRecebido.Text);
+   ValorTotal := StrToCurr(EdtTotal.Text);
    Troco := ValorRecebido - ValorTotal;
-   EdtTroco.Text := CurrToStr(Troco);
+   EditTroco.Text := CurrToStr(Troco);
    LblTroco.Caption :=  FormatFloat('###.00,', Troco);
 end;
 
@@ -295,7 +310,6 @@ begin
 end;
 
 procedure TfrmVendas.GeraNfce;
-
 Var
   NotaF: NotaFiscal;
   Item : integer;
@@ -345,8 +359,8 @@ begin
   NotaF.NFe.Emit.enderEmit.xPais   := 'BRASIL';
 
   NotaF.NFe.Emit.IEST              := '';
- // NotaF.NFe.Emit.IM                := '2648800'; // Preencher no caso de existir serviços na nota
-  //NotaF.NFe.Emit.CNAE              := '6201500'; // Verifique na cidade do emissor da NFe se é permitido
+ 	// NotaF.NFe.Emit.IM               := '2648800'; // Preencher no caso de existir serviços na nota
+ 	//NotaF.NFe.Emit.CNAE              := '6201500'; // Verifique na cidade do emissor da NFe se é permitido
                                 // a inclusão de serviços na NFe
   NotaF.NFe.Emit.CRT               := crtSimplesNacional;// (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
 
@@ -418,7 +432,7 @@ begin
 
    // lei da transparencia nos impostos
      Produto.Imposto.vTotTrib := 0;
-     Produto.Imposto.ICMS.CST          := cst00;
+     Produto.Imposto.ICMS.CST   	:= cst00;
      Produto.Imposto.ICMS.orig    := oeNacional;
      Produto.Imposto.ICMS.modBC   := dbiValorOperacao;
      Produto.Imposto.ICMS.vBC     := 100;
@@ -455,7 +469,7 @@ begin
    NotaF.NFe.Total.ICMSTot.vProd   := DM.QueryVenda.FieldByName('VALOR').Value;
    NotaF.NFe.Total.ICMSTot.vFrete  := 0;
    NotaF.NFe.Total.ICMSTot.vSeg    := 0;
-   NotaF.NFe.Total.ICMSTot.vDesc   := StrToCurr(EdtDesconto.Text);
+   NotaF.NFe.Total.ICMSTot.vDesc   := StrToCurr(EditDesconto.Text);
    NotaF.NFe.Total.ICMSTot.vII     := 0;
    NotaF.NFe.Total.ICMSTot.vIPI    := 0;
    NotaF.NFe.Total.ICMSTot.vPIS    := 0;
@@ -501,16 +515,16 @@ end;
 procedure TfrmVendas.IniciarVenda;
 begin
 	DM.dataSetVendas.Append;
-  LimpaGrid;
 end;
 
 procedure TfrmVendas.LimpaCampos;
 begin
-	EdtTotalVenda.Text := '';
-  EdtValorRecebido.Text := '';
-  EdtData.Text := '';
+  EditRecebido.Text := '';
+  EdtTotal.Text := '';
+  EditTroco.Text := '';
+  EditDesconto.Text := '';
+  EdtDataVenda.Text := '';
   EdtHora.Text := '';
-  EdtTroco.Text := '';
   LblTroco.Caption := '0';
   CarregarFoto;
   LimpaGrid;
@@ -524,12 +538,7 @@ begin
   'COD_PRODUTO,VALOR,VALOR_TOTAL FROM DETALHE_VENDA');
   DM.QueryDetVenda.SQL.Add('WHERE COD_VENDA = NULL');
 	DM.QueryDetVenda.Open;
-
-	DBItensVendidos.Columns[0].Alignment := taCenter;
-	DBItensVendidos.Columns[2].Alignment := taCenter;
-	DBItensVendidos.Columns[3].Alignment := taCenter;
-
-  CalcularSubTotal;
+	CalcularSubTotal;
 end;
 
 procedure TfrmVendas.LimparProdutos;
@@ -537,21 +546,24 @@ begin
    txtBusca.Text := '';
    txtBusca.SetFocus;
    EdtProduto.Text := '';
+   edtUnitario.Text := '';
    edtQuantidade.Text := '1';
-
 end;
 
 procedure TfrmVendas.ListarItens;
+var
+	Codigo: Integer;
 begin
 	DM.QueryDetVenda.Close;
 	DM.QueryDetVenda.SQL.Clear;
-	DM.QueryDetVenda.SQL.Add('SELECT CODIGO, COD_VENDA,PRODUTO,QUANTIDADE,VALOR,'+
-  'COD_PRODUTO,VALOR_TOTAL FROM DETALHE_VENDA  ORDER BY COD_VENDA ASC');
+	DM.QueryDetVenda.SQL.Add('SELECT CODIGO,COD_VENDA,PRODUTO,QUANTIDADE,'+
+  'COD_PRODUTO,VALOR,VALOR_TOTAL FROM DETALHE_VENDA');
 	DM.QueryDetVenda.Open;
 
-	DBItensVendidos.Columns[0].Alignment := taCenter;
-	DBItensVendidos.Columns[2].Alignment := taCenter;
-	DBItensVendidos.Columns[3].Alignment := taCenter;
+  DBItensVendidos.Columns[0].Alignment := taCenter;
+  DBItensVendidos.Columns[2].Alignment := taCenter;
+  DBItensVendidos.Columns[3].Alignment := taCenter;
+
 end;
 
 procedure TfrmVendas.AlimentarDetalheVenda;
@@ -584,15 +596,14 @@ procedure TfrmVendas.AlimentarVendas;
 var
 	ValorTotal: Currency;
 	Qtde: TSingentonQuantidade;
+  Hora:String;
 
 begin
 	Qtde:= TSingentonQuantidade.GetInstance;
 	ValorTotal:= Qtde.Totalizar(Quantidade,ValorUnitario);
-
-// 	DM.dataSetVendas.FieldByName('CODIGO').Value :=  Id;
-  EdtTotalVenda.Text := CurrToStr(ValorTotal);
-	EdtData.Text := DateToStr(Now);
-	EdtHora.Text := TimeToStr(Now);
+  EdtTotal.Text := CurrToStr(ValorTotal);
+	EdtDataVenda.Text := DateToStr(Now);
+  EdtHora.Text := TimeToStr(Now);
 	DM.dataSetVendas.FieldByName('COD_FUNCIONARIO').Value := DM.consultaFunc.FieldByName('CODIGO').Value;
 	DM.dataSetVendas.FieldByName('FUNCIONARIO').Value := DM.consultaUsuarios.FieldByName('USUARIO').Value;
 end;
@@ -647,8 +658,8 @@ end;
  var
  Total:Currency;
  begin
- Total := ValorUnitario * Quantidade;
- Result := Total;
+ 	Total := ValorUnitario * Quantidade;
+ 	Result := Total;
  end;
 
 initialization

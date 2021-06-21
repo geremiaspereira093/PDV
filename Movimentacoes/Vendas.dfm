@@ -42,6 +42,8 @@ object frmVendas: TfrmVendas
     Color = clSilver
     ParentBackground = False
     TabOrder = 0
+    ExplicitLeft = 1
+    ExplicitTop = -5
   end
   object painelGrid: TPanel
     Left = 0
@@ -89,7 +91,7 @@ object frmVendas: TfrmVendas
       Width = 789
       Height = 485
       Align = alClient
-      DataSource = SrcQueryVendas
+      DataSource = DSQueryDetVendas
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -111,6 +113,7 @@ object frmVendas: TfrmVendas
         item
           Expanded = False
           FieldName = 'VALOR'
+          Width = 64
           Visible = True
         end
         item
@@ -179,7 +182,7 @@ object frmVendas: TfrmVendas
       end
       object Label13: TLabel
         Left = 8
-        Top = 156
+        Top = 158
         Width = 141
         Height = 19
         Caption = 'Cancelar Venda  [F4]'
@@ -351,7 +354,7 @@ object frmVendas: TfrmVendas
     end
     object EdtProduto: TDBEdit
       Left = 23
-      Top = 195
+      Top = 193
       Width = 186
       Height = 21
       DataField = 'PRODUTO'
@@ -367,8 +370,6 @@ object frmVendas: TfrmVendas
       Color = clTeal
       ParentBackground = False
       TabOrder = 5
-      ExplicitLeft = 5
-      ExplicitTop = 558
       object Label9: TLabel
         Left = 5
         Top = 20
@@ -403,143 +404,147 @@ object frmVendas: TfrmVendas
       Height = 485
       Align = alRight
       TabOrder = 6
-      object Label4: TLabel
-        Left = 20
-        Top = 98
-        Width = 91
-        Height = 22
-        Caption = 'Valor Total'
-        FocusControl = EdtTotalVenda
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label6: TLabel
-        Left = 20
-        Top = 26
-        Width = 125
-        Height = 22
-        Caption = 'Valor Recebido'
-        FocusControl = EdtValorRecebido
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label7: TLabel
-        Left = 20
-        Top = 235
-        Width = 49
-        Height = 22
-        Caption = 'Troco'
-        FocusControl = EdtTroco
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label3: TLabel
-        Left = 20
-        Top = 310
-        Width = 88
-        Height = 22
-        Caption = 'Data Atual'
-        FocusControl = edtUnitario
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label2: TLabel
-        Left = 23
-        Top = 388
-        Width = 70
-        Height = 22
-        Caption = 'Hor'#225'rio '
-        FocusControl = edtUnitario
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label18: TLabel
-        Left = 20
-        Top = 173
-        Width = 76
-        Height = 22
-        Caption = 'Desconto'
-        FocusControl = EdtDesconto
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -19
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object EdtTotalVenda: TDBEdit
-        Left = 23
-        Top = 128
-        Width = 186
-        Height = 21
-        DataField = 'VALOR_TOTAL'
-        DataSource = srcVendas
+      object Panel4: TPanel
+        Left = 0
+        Top = 1
+        Width = 227
+        Height = 483
+        Align = alRight
         TabOrder = 0
-      end
-      object EdtValorRecebido: TDBEdit
-        Left = 23
-        Top = 58
-        Width = 186
-        Height = 21
-        DataField = 'VALOR_RECEBIDO'
-        DataSource = srcVendas
-        TabOrder = 1
-      end
-      object EdtTroco: TDBEdit
-        Left = 23
-        Top = 273
-        Width = 186
-        Height = 21
-        DataField = 'TROCO'
-        DataSource = srcVendas
-        TabOrder = 2
-      end
-      object EdtData: TDBEdit
-        Left = 23
-        Top = 348
-        Width = 186
-        Height = 21
-        DataField = 'DATA_VENDA'
-        DataSource = srcVendas
-        TabOrder = 3
-      end
-      object EdtHora: TDBEdit
-        Left = 23
-        Top = 421
-        Width = 186
-        Height = 21
-        DataField = 'HORA'
-        DataSource = srcVendas
-        TabOrder = 4
-      end
-      object EdtDesconto: TDBEdit
-        Left = 23
-        Top = 203
-        Width = 186
-        Height = 21
-        DataField = 'DESCONTO'
-        DataSource = srcVendas
-        TabOrder = 5
+        object Label22: TLabel
+          Left = 20
+          Top = 374
+          Width = 42
+          Height = 22
+          Caption = 'Hora'
+          FocusControl = edtUnitario
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Times New Roman'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 20
+          Top = 235
+          Width = 49
+          Height = 22
+          Caption = 'Troco'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Times New Roman'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label6: TLabel
+          Left = 20
+          Top = 26
+          Width = 125
+          Height = 22
+          Caption = 'Valor Recebido'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Times New Roman'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label4: TLabel
+          Left = 20
+          Top = 98
+          Width = 91
+          Height = 22
+          Caption = 'Valor Total'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Times New Roman'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 22
+          Top = 310
+          Width = 40
+          Height = 22
+          Caption = 'Data'
+          FocusControl = edtUnitario
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Times New Roman'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label18: TLabel
+          Left = 20
+          Top = 173
+          Width = 76
+          Height = 22
+          Caption = 'Desconto'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Times New Roman'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object EdtTotal: TDBEdit
+          Left = 23
+          Top = 126
+          Width = 186
+          Height = 21
+          DataField = 'VALOR_TOTAL'
+          DataSource = srcVendas
+          TabOrder = 0
+        end
+        object EditRecebido: TDBEdit
+          Left = 23
+          Top = 54
+          Width = 186
+          Height = 21
+          DataField = 'VALOR_RECEBIDO'
+          DataSource = srcVendas
+          TabOrder = 1
+        end
+        object EditTroco: TDBEdit
+          Left = 20
+          Top = 267
+          Width = 186
+          Height = 21
+          DataField = 'TROCO'
+          DataSource = srcVendas
+          TabOrder = 2
+        end
+        object EdtDataVenda: TDBEdit
+          Left = 22
+          Top = 338
+          Width = 186
+          Height = 21
+          DataField = 'DATA_VENDA'
+          DataSource = srcVendas
+          TabOrder = 3
+        end
+        object EditDesconto: TDBEdit
+          Left = 23
+          Top = 201
+          Width = 186
+          Height = 21
+          DataField = 'DESCONTO'
+          DataSource = srcVendas
+          TabOrder = 4
+        end
+        object EdtHora: TDBEdit
+          Left = 22
+          Top = 407
+          Width = 186
+          Height = 21
+          DataField = 'HORA'
+          DataSource = srcVendas
+          TabOrder = 5
+        end
       end
     end
     object MediaPlayer1: TMediaPlayer
@@ -581,7 +586,7 @@ object frmVendas: TfrmVendas
     Top = 6
   end
   object DSQueryDetVendas: TDataSource
-    DataSet = DM.QueryDetVenda
+    DataSet = DM.DataSetDetVenda
     Left = 1274
     Top = 5
   end
@@ -601,7 +606,6 @@ object frmVendas: TfrmVendas
     end
   end
   object DataSource1: TDataSource
-    OnUpdateData = ConfigurarBanco1Click
     Left = 705
     Top = 5
   end

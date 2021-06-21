@@ -164,9 +164,6 @@ type
     consultaProdutosVALOR: TBCDField;
     consultaProdutosIMAGEM: TBlobField;
     DataSetId: TADODataSet;
-    QueryId: TADOQuery;
-    QueryIdID: TIntegerField;
-    QueryIdTABELA: TStringField;
     dataSetVendasCODIGO: TAutoIncField;
     DataSetIdID: TIntegerField;
     DataSetIdTABELA: TStringField;
@@ -174,6 +171,9 @@ type
     DataSetDetVendaCODIGO: TIntegerField;
     QueryDetVendaCODIGO: TIntegerField;
     QueryDetVendaCOD_PRODUTO: TIntegerField;
+    QueryId: TADOQuery;
+    QueryIdID: TIntegerField;
+    QueryIdTABELA: TStringField;
     procedure dataSetProdutosBeforeInsert(DataSet: TDataSet);
     procedure dataSetProdutosAfterPost(DataSet: TDataSet);
     procedure dataSetProdutosAfterDelete(DataSet: TDataSet);

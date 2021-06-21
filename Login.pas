@@ -100,7 +100,7 @@ begin
     abort
   end
   else
-    frmLogin.Close;
+    Close;
 end;
 
 end.

@@ -3,7 +3,7 @@ object FrmConfirmaCancelamento: TFrmConfirmaCancelamento
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'PDV'
+  Caption = 'Cancelar Item'
   ClientHeight = 223
   ClientWidth = 495
   Color = clTeal

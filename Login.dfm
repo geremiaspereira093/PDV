@@ -1,11 +1,11 @@
 object frmLogin: TfrmLogin
   Left = 0
   Top = 0
-  BorderIcons = [biMinimize, biMaximize]
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Acesso ao sistema'
-  ClientHeight = 191
-  ClientWidth = 292
+  ClientHeight = 147
+  ClientWidth = 316
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,15 +24,17 @@ object frmLogin: TfrmLogin
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 292
-    Height = 191
+    Width = 316
+    Height = 147
     Align = alClient
     Color = clMedGray
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 420
+    ExplicitHeight = 151
     object Label1: TLabel
       Left = 161
-      Top = 36
+      Top = 31
       Width = 52
       Height = 19
       Caption = 'Usu'#225'rio'
@@ -45,9 +47,9 @@ object frmLogin: TfrmLogin
     end
     object Label2: TLabel
       Left = 161
-      Top = 94
-      Width = 41
-      Height = 19
+      Top = 86
+      Width = 52
+      Height = 22
       Caption = 'Senha'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -57,10 +59,10 @@ object frmLogin: TfrmLogin
       ParentFont = False
     end
     object Image1: TImage
-      Left = 8
+      Left = 20
       Top = 36
-      Width = 131
-      Height = 125
+      Width = 106
+      Height = 95
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000E10000
         00E10803000000096D224800000180504C5445FFFFFFE2BC5D304551344D5B4D
@@ -208,23 +210,23 @@ object frmLogin: TfrmLogin
     end
     object txtSenha: TEdit
       Left = 161
-      Top = 119
-      Width = 97
+      Top = 105
+      Width = 135
       Height = 21
       PasswordChar = '*'
       TabOrder = 0
     end
     object ComboUsuario: TComboBox
       Left = 161
-      Top = 61
-      Width = 97
+      Top = 56
+      Width = 135
       Height = 21
       TabOrder = 1
     end
   end
   object DSLogin: TDataSource
     DataSet = DM.consultaUsuarios
-    Left = 240
-    Top = 8
+    Left = 215
+    Top = 65529
   end
 end

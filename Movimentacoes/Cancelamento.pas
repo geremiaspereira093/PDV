@@ -30,7 +30,7 @@ implementation
 
 {$R *.dfm}
 
-uses ModuloDados;
+uses ModuloDados, Vendas;
 
 procedure TFrmCancelarVenda.BtnNaoClick(Sender: TObject);
 begin
@@ -42,6 +42,7 @@ begin
 	DM.dataSetVendas.Cancel;
   DM.DataSetDetVenda.Close;
   DM.DataSetDetVenda.Open;
+  DM.QueryDetVenda.Close;
   Close;
 end;
 

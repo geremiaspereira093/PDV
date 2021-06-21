@@ -133,34 +133,28 @@
         </DCCReference>
         <DCCReference Include="Movimentacoes\CuponFiscal.pas">
             <Form>frmCupomFiscal</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Estoque\SaidaEstoque.pas">
             <Form>frmSaiEstoque</Form>
         </DCCReference>
         <DCCReference Include="Estoque\EntradaEstoque.pas">
             <Form>frmEntradaEstoque</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Movimentacoes\ControleId.pas">
-            <Form>FrmIdTabelas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Movimentacoes\NovaQtde.pas">
             <Form>FrmQuantidade</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Vcl.Consts.pas"/>
         <DCCReference Include="Movimentacoes\Cancelamento.pas">
             <Form>FrmCancelarVenda</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Movimentacoes\CancelaItem.pas">
             <Form>FrmCancelaItem</Form>
         </DCCReference>
         <DCCReference Include="Movimentacoes\ItemCancelado.pas">
             <Form>FrmConfirmaCancelamento</Form>
-            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Movimentacoes\Controle.pas">
+            <Form>IdTabelas</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

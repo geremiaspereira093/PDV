@@ -499,6 +499,8 @@ object frmProdutos: TfrmProdutos
     object TabSheet2: TTabSheet
       Caption = 'Alterar o Produto'
       ImageIndex = 1
+      ExplicitLeft = 39
+      ExplicitTop = 28
       object Image3: TImage
         Left = 656
         Top = 3

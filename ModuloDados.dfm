@@ -425,7 +425,7 @@ object DM: TDM
     object dataSetVendasHORA: TDateTimeField
       DisplayLabel = 'Hor'#225'rio da Venda'
       FieldName = 'HORA'
-      EditMask = '!90:00;1;_'
+      DisplayFormat = 'hh:mm'
     end
     object dataSetVendasDESCONTO: TBCDField
       DisplayLabel = 'Desconto'
@@ -527,8 +527,8 @@ object DM: TDM
   object DataSourceRelatorioVendas: TDataSource
     AutoEdit = False
     DataSet = AdoQueryRelatorio_Vendas
-    Left = 175
-    Top = 380
+    Left = 180
+    Top = 395
   end
   object RelatorioVendas: TppReport
     AutoStop = False
@@ -1385,9 +1385,9 @@ object DM: TDM
     SQL.Strings = (
       'SELECT CODIGO, PRODUTO,QUANTIDADE,'
       'VALOR,VALOR_TOTAL,COD_PRODUTO  FROM DETALHE_VENDA'
-      ''
+      'WHERE CODIGO = NULL'
       '')
-    Left = 413
+    Left = 403
     Top = 226
     object QueryDetVendaCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -1424,8 +1424,8 @@ object DM: TDM
     end
   end
   object DSQueryDetVendas: TDataSource
-    Left = 287
-    Top = 403
+    Left = 297
+    Top = 398
   end
   object QueryVenda: TADOQuery
     Connection = conexaoBanco
@@ -1433,7 +1433,7 @@ object DM: TDM
     Parameters = <>
     SQL.Strings = (
       'SELECT CODIGO,COD_FUNCIONARIO,DATA_VENDA,VALOR_TOTAL,HORA,'
-      'FUNCIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO  FROM VENDAS')
+      'FUNCIONARIO,DESCONTO,VALOR_RECEBIDO,TROCO  FROM VENDA')
     Left = 408
     Top = 287
     object QueryVendaCODIGO: TAutoIncField
@@ -1478,8 +1478,8 @@ object DM: TDM
     CursorType = ctStatic
     CommandText = 'SELECT ID, TABELA FROM CONTROLA_ID'
     Parameters = <>
-    Left = 410
-    Top = 340
+    Left = 405
+    Top = 350
     object DataSetIdID: TIntegerField
       FieldName = 'ID'
     end

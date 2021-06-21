@@ -91,7 +91,6 @@ object frmCupomFiscal: TfrmCupomFiscal
     Top = 15
     Width = 431
     Height = 206
-    DataSource = DM.DataSourcQueryCupom
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
